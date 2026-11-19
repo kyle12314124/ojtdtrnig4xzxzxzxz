@@ -1,0 +1,43 @@
+-- ===========================================================================
+-- OPTIONAL reference data for a fresh installation.
+--
+-- This file contains NO attendance data and is safe to edit. Copy the parts
+-- you need into the Supabase SQL editor, or save this as `seed.sql` if you
+-- use `supabase db reset` locally.
+--
+-- Replace department names and schedule times with your organization's.
+-- ===========================================================================
+
+-- Departments -----------------------------------------------------------------
+-- insert into public.departments (name, code, description)
+-- values
+--   ('Information Technology', 'IT', 'Software, infrastructure, and support'),
+--   ('Operations', 'OPS', 'Day-to-day operations')
+-- on conflict do nothing;
+
+-- Standard weekday schedule ---------------------------------------------------
+-- Paid periods are the working windows. The gaps between them are unpaid
+-- breaks and are automatically excluded from worked minutes.
+--
+-- insert into public.work_schedules (name, description, grace_minutes, work_days)
+-- values ('OJT Standard', 'Monday–Friday, 8:00–12:00 and 13:00–17:00', 10,
+--         '{1,2,3,4,5}')
+-- on conflict do nothing;
+--
+-- insert into public.schedule_periods (schedule_id, label, start_time, end_time, sort_order)
+-- select s.id, v.label, v.start_time, v.end_time, v.sort_order
+-- from public.work_schedules s
+-- cross join (values
+--   ('Morning',   '08:00'::time, '12:00'::time, 1),
+--   ('Afternoon', '13:00'::time, '17:00'::time, 2)
+-- ) as v(label, start_time, end_time, sort_order)
+-- where s.name = 'OJT Standard'
+--   and not exists (
+--     select 1 from public.schedule_periods p
+--     where p.schedule_id = s.id and p.label = v.label
+--   );
+
+-- Holidays --------------------------------------------------------------------
+-- insert into public.holidays (name, holiday_date, holiday_type, is_paid)
+-- values ('Founders Day', '2026-12-01', 'special_non_working', true)
+-- on conflict do nothing;
