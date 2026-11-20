@@ -22,12 +22,13 @@ import { Toggle } from '@/components/ui/toggle'
 import { useAuth } from '@/features/auth/auth-context'
 import { getSupabase } from '@/lib/supabase'
 import { formatDateTime } from '@/lib/dates'
-import { errorMessage } from '@/lib/utils'
+import { errorMessage, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type { OnboardingRequest, OnboardingSettings } from '@/types'
 
 type PendingAction = { type: 'approve' | 'reject'; request: OnboardingRequest }
 
 function describeSettingsError(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the automatic-approval migration. Apply 20261119000600_auto_approve.sql, then reload this page.'
   }

@@ -59,3 +59,17 @@ export function errorMessage(error: unknown): string {
   }
   return 'An unexpected error occurred. Please try again.'
 }
+
+export const SESSION_EXPIRED_MESSAGE =
+  'Your session has expired or is no longer authorized. Sign in again to continue.'
+
+/** True when the database rejected the call because the session is not valid. */
+export function isSessionError(message: string): boolean {
+  const text = message.toLowerCase()
+  return (
+    text.includes('permission denied') ||
+    text.includes('jwt') ||
+    text.includes('not authenticated') ||
+    text.includes('invalid claim')
+  )
+}

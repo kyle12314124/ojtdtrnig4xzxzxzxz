@@ -176,7 +176,7 @@ export function LoginPage() {
         </div>
         <div className="mx-auto w-full max-w-md">
           <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <span className="bg-brand-600 flex size-10 items-center justify-center rounded-xl text-white">
+            <span className="bg-solid-brand flex size-10 items-center justify-center rounded-xl text-white">
               <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden>
                 <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.7" />
                 <path

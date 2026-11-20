@@ -39,18 +39,22 @@ import {
 } from '@/components/ui/table'
 import { getSupabase } from '@/lib/supabase'
 import { formatDateOnly, formatTime } from '@/lib/dates'
-import { errorMessage, formatMinutes, pluralize } from '@/lib/utils'
+import {
+  errorMessage,
+  formatMinutes,
+  isSessionError,
+  pluralize,
+  SESSION_EXPIRED_MESSAGE,
+} from '@/lib/utils'
 import { useScheduleScope } from '@/features/schedule/schedule-scope-context'
 import type { AdminDashboard } from '@/types'
 
 function friendly(message: string): string {
-  if (message.includes('admin_dashboard')) {
-    return 'The database is missing the schedule filter migration. Apply 20261119001800_schedule_filters.sql, then reload.'
-  }
-  if (message.includes('Could not find the function') || message.includes('does not exist')) {
-    return 'The database is missing the dashboard migration. Apply 20261119000800_dashboard_and_employees.sql, then reload.'
-  }
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('FORBIDDEN')) return 'Your account is not allowed to view the dashboard.'
+  if (message.includes('Could not find the function') || message.includes('does not exist')) {
+    return 'The dashboard data function is unavailable. Apply the latest migrations (including 20261119001800_schedule_filters.sql), then reload.'
+  }
   return message
 }
 

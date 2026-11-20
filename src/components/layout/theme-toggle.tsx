@@ -38,15 +38,17 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}
       className={cn(
-        'text-ink-500 hover:bg-ink-100 hover:text-ink-800 inline-flex size-9 items-center justify-center rounded-lg transition-colors',
+        'text-ink-500 hover:bg-ink-100 hover:text-ink-800 inline-flex size-9 items-center justify-center rounded-lg transition duration-150 active:scale-90',
         className,
       )}
     >
-      {mode === 'dim' ? (
-        <Sun className="size-4" aria-hidden />
-      ) : (
-        <Moon className="size-4" aria-hidden />
-      )}
+      <span key={mode} className="animate-pop-in">
+        {mode === 'dim' ? (
+          <Sun className="size-4" aria-hidden />
+        ) : (
+          <Moon className="size-4" aria-hidden />
+        )}
+      </span>
     </button>
   )
 }

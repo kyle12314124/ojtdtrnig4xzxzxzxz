@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { CalendarOff, Clock, LogIn, LogOut, RefreshCw, TriangleAlert } from 'lucide-react'
 import { useAuth } from '@/features/auth/auth-context'
 import { getSupabase } from '@/lib/supabase'
-import { formatTime } from '@/lib/dates'
-import { errorMessage, formatMinutes } from '@/lib/utils'
+import { formatDateOnly, formatTime } from '@/lib/dates'
+import { errorMessage, formatMinutes, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import { Alert } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -13,6 +13,7 @@ import { Skeleton } from '@/components/ui/spinner'
 import type { AttendanceRecord, MyDay } from '@/types'
 
 function friendlyPunchError(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('SCHEDULE_NOT_ASSIGNED')) {
     return 'Join a work schedule on the My schedule page before timing in.'
   }
@@ -191,7 +192,9 @@ export function TimeClock({ onChanged }: { onChanged?: () => void }) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-ink-500 text-xs font-medium tracking-wide uppercase">Today</p>
-            <p className="numeric text-ink-900 text-lg font-semibold">{day?.work_date ?? '—'}</p>
+            <p className="numeric text-ink-900 text-lg font-semibold">
+              {day ? formatDateOnly(day.work_date) : '—'}
+            </p>
             {day ? (
               <p className="text-ink-500 text-xs">
                 Server time {formatTime(day.server_time)}

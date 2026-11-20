@@ -23,6 +23,16 @@
   --color-brand-900: #2e3a30;
   --color-brand-950: #172019;
 
+  /*
+   * Solid button fills. These are deliberately deeper than --color-brand-600,
+   * which is tuned for text and icons on dark cards: white labels need a
+   * darker green/red underneath to stay legible. Re-declared per surface below.
+   */
+  --color-solid-brand: #4e6a53;
+  --color-solid-brand-hover: #405543;
+  --color-solid-danger: #b0473c;
+  --color-solid-danger-hover: #8f392f;
+
   /* Neutrals — warm gray */
   --color-ink-50: #f8f8f7;
   --color-ink-100: #f1f1ef;
@@ -44,20 +54,44 @@
   --color-hero: #22301f;
   --color-success-50: #eef7f0;
   --color-success-100: #d9ecdd;
+  --color-success-200: #bfe0c6;
+  --color-success-300: #9bcda6;
+  --color-success-400: #6fb37f;
+  --color-success-500: #4f955f;
   --color-success-600: #3f7a4d;
   --color-success-700: #32603e;
+  --color-success-800: #294e33;
+  --color-success-900: #22402b;
   --color-warning-50: #fdf7ec;
   --color-warning-100: #f8e9c8;
+  --color-warning-200: #f2d99b;
+  --color-warning-300: #e9c367;
+  --color-warning-400: #d8a33f;
+  --color-warning-500: #bd8a26;
   --color-warning-600: #a9761b;
   --color-warning-700: #855b14;
+  --color-warning-800: #6b4911;
+  --color-warning-900: #573b10;
   --color-danger-50: #fdf1f0;
   --color-danger-100: #f8ddda;
+  --color-danger-200: #f2c2bd;
+  --color-danger-300: #e79b93;
+  --color-danger-400: #d8756a;
+  --color-danger-500: #c2574a;
   --color-danger-600: #b0473c;
   --color-danger-700: #8f392f;
+  --color-danger-800: #753029;
+  --color-danger-900: #5f2924;
   --color-info-50: #eef4f8;
   --color-info-100: #d8e7f1;
+  --color-info-200: #b9d5e6;
+  --color-info-300: #8fbcd4;
+  --color-info-400: #629cbd;
+  --color-info-500: #4a83a5;
   --color-info-600: #3d6f8e;
   --color-info-700: #315a74;
+  --color-info-800: #294a60;
+  --color-info-900: #223d4f;
 
   /* Layout */
   --spacing-sidebar: 17rem;
@@ -96,6 +130,11 @@
     --color-brand-900: #c6d9c9;
     --color-brand-950: #0f1611;
 
+    --color-solid-brand: #527557;
+    --color-solid-brand-hover: #446349;
+    --color-solid-danger: #b04a3f;
+    --color-solid-danger-hover: #963e35;
+
     --color-ink-50: #1e231e;
     --color-ink-100: #252b25;
     --color-ink-200: #313831;
@@ -110,23 +149,47 @@
 
     --color-success-50: #15251a;
     --color-success-100: #1d3423;
+    --color-success-200: #2c4a33;
+    --color-success-300: #3a5f43;
+    --color-success-400: #4f7d58;
+    --color-success-500: #5f9569;
     --color-success-600: #6fae7e;
     --color-success-700: #8cc79a;
+    --color-success-800: #a9d6b4;
+    --color-success-900: #c6e4cd;
 
     --color-warning-50: #251d10;
     --color-warning-100: #342810;
+    --color-warning-200: #55411f;
+    --color-warning-300: #745824;
+    --color-warning-400: #a67c2c;
+    --color-warning-500: #c2912f;
     --color-warning-600: #d8a33f;
     --color-warning-700: #e8bd6b;
+    --color-warning-800: #f0d191;
+    --color-warning-900: #f6e2b6;
 
     --color-danger-50: #271614;
     --color-danger-100: #3a1e1a;
+    --color-danger-200: #552e29;
+    --color-danger-300: #713c34;
+    --color-danger-400: #9c4c42;
+    --color-danger-500: #bb5d52;
     --color-danger-600: #d37064;
     --color-danger-700: #e39a90;
+    --color-danger-800: #edb8b0;
+    --color-danger-900: #f4d1cc;
 
     --color-info-50: #131f27;
     --color-info-100: #1b2f3c;
+    --color-info-200: #2b4353;
+    --color-info-300: #355568;
+    --color-info-400: #4f7d95;
+    --color-info-500: #6598b3;
     --color-info-600: #7aafcb;
     --color-info-700: #97c4da;
+    --color-info-800: #b3d5e6;
+    --color-info-900: #cfe6f2;
 
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 1px 3px rgb(0 0 0 / 0.25);
     --shadow-popover: 0 12px 32px -12px rgb(0 0 0 / 0.6), 0 2px 8px rgb(0 0 0 / 0.35);
@@ -202,6 +265,11 @@
     --color-brand-800: #a3bfa9;
     --color-brand-900: #c6d9c9;
 
+    --color-solid-brand: #4d7355;
+    --color-solid-brand-hover: #405f46;
+    --color-solid-danger: #a9483e;
+    --color-solid-danger-hover: #913c33;
+
     --color-ink-50: #2b342c;
     --color-ink-100: #333d34;
     --color-ink-200: #3f4a40;
@@ -216,23 +284,47 @@
 
     --color-success-50: #1b2c1f;
     --color-success-100: #223a27;
+    --color-success-200: #2c4a33;
+    --color-success-300: #3a5f43;
+    --color-success-400: #4f7d58;
+    --color-success-500: #5f9569;
     --color-success-600: #6fae7e;
     --color-success-700: #8cc79a;
+    --color-success-800: #a9d6b4;
+    --color-success-900: #c6e4cd;
 
     --color-warning-50: #2d2414;
     --color-warning-100: #3a2e17;
+    --color-warning-200: #55411f;
+    --color-warning-300: #745824;
+    --color-warning-400: #a67c2c;
+    --color-warning-500: #c2912f;
     --color-warning-600: #d8a33f;
     --color-warning-700: #e8bd6b;
+    --color-warning-800: #f0d191;
+    --color-warning-900: #f6e2b6;
 
     --color-danger-50: #2f1c19;
     --color-danger-100: #3d2622;
+    --color-danger-200: #552e29;
+    --color-danger-300: #713c34;
+    --color-danger-400: #9c4c42;
+    --color-danger-500: #bb5d52;
     --color-danger-600: #d37064;
     --color-danger-700: #e39a90;
+    --color-danger-800: #edb8b0;
+    --color-danger-900: #f4d1cc;
 
     --color-info-50: #1a2831;
     --color-info-100: #22343f;
+    --color-info-200: #2b4353;
+    --color-info-300: #355568;
+    --color-info-400: #4f7d95;
+    --color-info-500: #6598b3;
     --color-info-600: #7aafcb;
     --color-info-700: #97c4da;
+    --color-info-800: #b3d5e6;
+    --color-info-900: #cfe6f2;
 
     --shadow-card: 0 10px 28px -18px rgb(10 14 10 / 0.45), 0 2px 6px rgb(10 14 10 / 0.18);
     --shadow-popover: 0 14px 36px -14px rgb(10 14 10 / 0.55), 0 2px 8px rgb(10 14 10 / 0.28);

@@ -188,7 +188,7 @@ function MobileTabBar({
               >
                 <span
                   className={cn(
-                    'flex size-8 items-center justify-center rounded-lg',
+                    'flex size-8 items-center justify-center rounded-lg transition-colors duration-150',
                     active && 'bg-brand-600/15',
                   )}
                 >
@@ -248,7 +248,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
 
   const brand = (
     <Link to="/" className="flex items-center gap-2.5 px-3 py-1" aria-label={env.appName}>
-      <span className="bg-brand-600 flex size-9 items-center justify-center rounded-lg text-white shadow-xs">
+      <span className="bg-solid-brand flex size-9 items-center justify-center rounded-lg text-white shadow-xs">
         <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden>
           <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
           <path

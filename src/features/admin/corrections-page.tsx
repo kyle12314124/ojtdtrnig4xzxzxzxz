@@ -23,13 +23,14 @@ import {
 import { getSupabase } from '@/lib/supabase'
 import { formatDateOnly, formatDateTime, formatTime } from '@/lib/dates'
 import { CORRECTION_TYPE_LABELS } from '@/lib/constants'
-import { errorMessage, pluralize } from '@/lib/utils'
+import { errorMessage, pluralize, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import { useScheduleScope } from '@/features/schedule/schedule-scope-context'
 import type { CorrectionListItem } from '@/types'
 
 type Decision = { request: CorrectionListItem; approve: boolean }
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the corrections migration. Apply 20261119001000_corrections.sql, then reload.'
   }

@@ -12,12 +12,19 @@ import {
 import { useAuth } from '@/features/auth/auth-context'
 import { TimeClock } from '@/features/attendance/time-clock'
 import { getSupabase } from '@/lib/supabase'
-import { errorMessage, formatMinutes, pluralize } from '@/lib/utils'
+import {
+  errorMessage,
+  formatMinutes,
+  isSessionError,
+  pluralize,
+  SESSION_EXPIRED_MESSAGE,
+} from '@/lib/utils'
 import { formatDateOnly, formatMonth, formatTime, todayKey } from '@/lib/dates'
 import { ROLE_LABELS } from '@/lib/constants'
 import { Alert } from '@/components/ui/alert'
 import { AttendanceBadge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { buttonClassName } from '@/components/ui/button-variants'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Skeleton } from '@/components/ui/spinner'
@@ -148,7 +155,8 @@ export function WorkspacePage() {
       setSummary(data as DtrPayload)
       setSummaryError(null)
     } catch (caught) {
-      setSummaryError(errorMessage(caught))
+      const message = errorMessage(caught)
+      setSummaryError(isSessionError(message) ? SESSION_EXPIRED_MESSAGE : message)
     } finally {
       setSummaryLoading(false)
     }
@@ -175,7 +183,8 @@ export function WorkspacePage() {
       setTrend(data as DtrPayload)
       setTrendError(null)
     } catch (caught) {
-      setTrendError(errorMessage(caught))
+      const message = errorMessage(caught)
+      setTrendError(isSessionError(message) ? SESSION_EXPIRED_MESSAGE : message)
     } finally {
       setTrendLoading(false)
     }
@@ -222,18 +231,12 @@ export function WorkspacePage() {
         description="Record your OJT attendance and open your daily time record. Timestamps come from the server clock, and unpaid breaks are excluded automatically."
         actions={
           <>
-            <Link
-              to="/dtr"
-              className="border-ink-300 text-ink-700 hover:bg-ink-100 bg-surface-muted inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs transition"
-            >
+            <Link to="/dtr" className={buttonClassName({ variant: 'outline' })}>
               <FileText className="size-4" aria-hidden />
               My DTR
             </Link>
             {isAdmin ? (
-              <Link
-                to="/admin/dashboard"
-                className="border-ink-300 text-ink-700 hover:bg-ink-100 bg-surface-muted inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs transition"
-              >
+              <Link to="/admin/dashboard" className={buttonClassName({ variant: 'outline' })}>
                 <CalendarDays className="size-4" aria-hidden />
                 Dashboard
               </Link>
@@ -456,10 +459,7 @@ export function WorkspacePage() {
                     You are not in a schedule yet, so timing in is locked. Join the schedule your
                     administrator published.
                   </p>
-                  <Link
-                    to="/my-schedule"
-                    className="bg-brand-600 hover:bg-brand-700 inline-flex h-9 w-full items-center justify-center rounded-lg px-3 text-sm font-medium text-white"
-                  >
+                  <Link to="/my-schedule" className={buttonClassName({ className: 'w-full' })}>
                     Join a schedule
                   </Link>
                 </div>

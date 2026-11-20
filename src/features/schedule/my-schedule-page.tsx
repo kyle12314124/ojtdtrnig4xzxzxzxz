@@ -10,12 +10,13 @@ import { EmptyState } from '@/components/ui/empty-state'
 import { Skeleton } from '@/components/ui/spinner'
 import { useAuth } from '@/features/auth/auth-context'
 import { getSupabase } from '@/lib/supabase'
-import { errorMessage, pluralize } from '@/lib/utils'
+import { errorMessage, isSessionError, pluralize, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type { WorkSchedule } from '@/types'
 
 const DAY_SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 function friendlyScheduleError(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('EMPLOYEE_NOT_ACTIVE')) {
     return 'Your account is not active. Ask your administrator to activate it.'
   }

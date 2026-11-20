@@ -35,7 +35,7 @@ import { useScheduleScope } from '@/features/schedule/schedule-scope-context'
 import { getSupabase } from '@/lib/supabase'
 import { DEFAULT_PAGE_SIZE, EMPLOYMENT_TYPE_LABELS } from '@/lib/constants'
 import { formatDateOnly } from '@/lib/dates'
-import { errorMessage, pluralize } from '@/lib/utils'
+import { errorMessage, pluralize, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type {
   Department,
   EmployeeListItem,
@@ -63,6 +63,7 @@ type StatusAction = { employee: EmployeeListItem; status: 'active' | 'inactive' 
 const EMPLOYMENT_TYPES = Object.keys(EMPLOYMENT_TYPE_LABELS) as EmploymentType[]
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the employee-management migration. Apply 20261119000800_dashboard_and_employees.sql, then reload.'
   }

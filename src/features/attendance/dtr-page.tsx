@@ -37,7 +37,13 @@ import { useScheduleScope } from '@/features/schedule/schedule-scope-context'
 import { timeOnDateToUtc, formatDateOnly, formatTime, todayKey } from '@/lib/dates'
 import { CORRECTION_TYPE_LABELS } from '@/lib/constants'
 import { exportDtrCsv, exportDtrExcel, exportDtrPdf } from '@/lib/export'
-import { errorMessage, formatMinutes, pluralize } from '@/lib/utils'
+import {
+  errorMessage,
+  formatMinutes,
+  isSessionError,
+  pluralize,
+  SESSION_EXPIRED_MESSAGE,
+} from '@/lib/utils'
 import type { CorrectionType, DtrPayload, EmployeePage, EmployeeListItem } from '@/types'
 
 function currentMonth(): string {
@@ -54,6 +60,7 @@ function monthBounds(month: string): { start: string; end: string } {
 }
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the DTR migration. Apply 20261119000900_dtr.sql, then reload.'
   }

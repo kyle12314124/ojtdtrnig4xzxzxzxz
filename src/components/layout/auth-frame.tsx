@@ -28,7 +28,7 @@ export function AuthFrame({
     <div className="bg-canvas relative min-h-dvh">
       <div className="relative mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-8 sm:px-6">
         <header className="flex items-center gap-3 pb-8">
-          <span className="bg-brand-600 flex size-10 items-center justify-center rounded-xl text-white">
+          <span className="bg-solid-brand flex size-10 items-center justify-center rounded-xl text-white">
             <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden>
               <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.7" />
               <path

@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { Alert } from '@/components/ui/alert'
 import { CorrectionBadge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { buttonClassName } from '@/components/ui/button-variants'
 import { Card, CardContent } from '@/components/ui/card'
 import { EmptyState, ErrorState } from '@/components/ui/empty-state'
 import { ConfirmDialog } from '@/components/ui/modal'
@@ -21,13 +22,15 @@ import {
 import { getSupabase } from '@/lib/supabase'
 import { formatDateOnly, formatDateTime, formatTime } from '@/lib/dates'
 import { CORRECTION_TYPE_LABELS } from '@/lib/constants'
-import { errorMessage } from '@/lib/utils'
+import { errorMessage, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type { CorrectionListItem } from '@/types'
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the corrections migration. Apply 20261119001000_corrections.sql, then reload.'
   }
+  if (message.includes('FORBIDDEN')) return 'You can only manage your own correction requests.'
   return message
 }
 
@@ -90,10 +93,7 @@ export function MyCorrectionsPage() {
               {loading ? null : <RefreshCw aria-hidden />}
               Refresh
             </Button>
-            <Link
-              to="/dtr"
-              className="bg-brand-600 hover:bg-brand-700 inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-medium text-white"
-            >
+            <Link to="/dtr" className={buttonClassName()}>
               <Wrench className="size-4" aria-hidden />
               New request
             </Link>
@@ -133,10 +133,7 @@ export function MyCorrectionsPage() {
           title="No correction requests"
           description="Open your DTR and use Request on a day whose punch is missing or wrong."
           action={
-            <Link
-              to="/dtr"
-              className="bg-brand-600 hover:bg-brand-700 inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-medium text-white"
-            >
+            <Link to="/dtr" className={buttonClassName()}>
               Open my DTR
             </Link>
           }

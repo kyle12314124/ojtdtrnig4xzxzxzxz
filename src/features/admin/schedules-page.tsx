@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/spinner'
 import { useAuth } from '@/features/auth/auth-context'
 import { getSupabase } from '@/lib/supabase'
 import { DAY_LABELS } from '@/lib/constants'
-import { errorMessage, pluralize } from '@/lib/utils'
+import { errorMessage, pluralize, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type { WorkSchedule } from '@/types'
 
 const DAY_VALUES = [1, 2, 3, 4, 5, 6, 7] as const
@@ -26,6 +26,7 @@ const DEFAULT_PERIODS: PeriodDraft[] = [
 ]
 
 function friendlyScheduleError(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('SCHEDULE_NAME_TAKEN')) {
     return 'A schedule with that name already exists. Choose another name.'
   }
@@ -439,7 +440,7 @@ export function SchedulesPage() {
                     onClick={() => toggleDay(value)}
                     className={
                       active
-                        ? 'bg-brand-600 rounded-md px-3 py-1.5 text-xs font-medium text-white'
+                        ? 'bg-solid-brand rounded-md px-3 py-1.5 text-xs font-medium text-white'
                         : 'border-ink-300 text-ink-600 hover:bg-ink-50 rounded-md border px-3 py-1.5 text-xs font-medium'
                     }
                   >

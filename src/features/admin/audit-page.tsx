@@ -22,10 +22,11 @@ import {
 import { getSupabase } from '@/lib/supabase'
 import { formatDateTime } from '@/lib/dates'
 import { ROLE_LABELS } from '@/lib/constants'
-import { errorMessage, pluralize } from '@/lib/utils'
+import { errorMessage, pluralize, isSessionError, SESSION_EXPIRED_MESSAGE } from '@/lib/utils'
 import type { AuditLogItem, AuditLogPage } from '@/types'
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('Could not find the function') || message.includes('does not exist')) {
     return 'The database is missing the audit migration. Apply 20261119001200_audit_logs.sql, then reload.'
   }

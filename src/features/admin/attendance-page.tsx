@@ -25,7 +25,13 @@ import {
 } from '@/components/ui/table'
 import { getSupabase } from '@/lib/supabase'
 import { formatDateOnly, formatTime, todayKey } from '@/lib/dates'
-import { errorMessage, formatMinutes, pluralize } from '@/lib/utils'
+import {
+  errorMessage,
+  formatMinutes,
+  pluralize,
+  isSessionError,
+  SESSION_EXPIRED_MESSAGE,
+} from '@/lib/utils'
 import { useScheduleScope } from '@/features/schedule/schedule-scope-context'
 import type { AttendanceListItem, AttendancePage, EmployeeListItem, EmployeePage } from '@/types'
 
@@ -34,6 +40,7 @@ function monthStart(): string {
 }
 
 function friendly(message: string): string {
+  if (isSessionError(message)) return SESSION_EXPIRED_MESSAGE
   if (message.includes('delete_attendance_record')) {
     return 'The database is missing the attendance delete migration. Apply 20261119001700_delete_attendance.sql, then reload.'
   }
