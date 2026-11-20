@@ -188,13 +188,13 @@
   .surface-dark {
     color-scheme: dark;
 
-    --color-surface: #1b211c;
-    --color-surface-muted: #222923;
+    --color-surface: #262e27;
+    --color-surface-muted: #2e372f;
 
-    --color-brand-50: #1a241b;
-    --color-brand-100: #223022;
-    --color-brand-200: #2e4231;
-    --color-brand-300: #3e5a43;
+    --color-brand-50: #243026;
+    --color-brand-100: #2d3b2f;
+    --color-brand-200: #38493a;
+    --color-brand-300: #465b49;
     --color-brand-400: #6f9277;
     --color-brand-500: #8cb094;
     --color-brand-600: #5f8166;
@@ -202,35 +202,35 @@
     --color-brand-800: #a3bfa9;
     --color-brand-900: #c6d9c9;
 
-    --color-ink-50: #20261f;
-    --color-ink-100: #272e27;
-    --color-ink-200: #333b33;
-    --color-ink-300: #454e45;
-    --color-ink-400: #8a938a;
-    --color-ink-500: #a3aba2;
-    --color-ink-600: #b9c0b8;
-    --color-ink-700: #ccd3cb;
-    --color-ink-800: #dee4dc;
-    --color-ink-900: #eff2ed;
+    --color-ink-50: #2b342c;
+    --color-ink-100: #333d34;
+    --color-ink-200: #3f4a40;
+    --color-ink-300: #4e5a4f;
+    --color-ink-400: #939c93;
+    --color-ink-500: #abb3aa;
+    --color-ink-600: #bdc4bc;
+    --color-ink-700: #cfd6ce;
+    --color-ink-800: #e0e6de;
+    --color-ink-900: #f0f3ee;
     --color-ink-950: #f8faf6;
 
-    --color-success-50: #15251a;
-    --color-success-100: #1d3423;
+    --color-success-50: #1b2c1f;
+    --color-success-100: #223a27;
     --color-success-600: #6fae7e;
     --color-success-700: #8cc79a;
 
-    --color-warning-50: #251d10;
-    --color-warning-100: #342810;
+    --color-warning-50: #2d2414;
+    --color-warning-100: #3a2e17;
     --color-warning-600: #d8a33f;
     --color-warning-700: #e8bd6b;
 
-    --color-danger-50: #271614;
-    --color-danger-100: #3a1e1a;
+    --color-danger-50: #2f1c19;
+    --color-danger-100: #3d2622;
     --color-danger-600: #d37064;
     --color-danger-700: #e39a90;
 
-    --color-info-50: #131f27;
-    --color-info-100: #1b2f3c;
+    --color-info-50: #1a2831;
+    --color-info-100: #22343f;
     --color-info-600: #7aafcb;
     --color-info-700: #97c4da;
 
