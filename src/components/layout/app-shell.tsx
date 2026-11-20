@@ -9,6 +9,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
 import { SidebarNav, type NavGroup, type NavItem } from './sidebar-nav'
+import { ThemeToggle } from './theme-toggle'
 
 function useClock() {
   const [now, setNow] = useState(() => new Date())
@@ -89,7 +90,7 @@ function UserMenu() {
       {open ? (
         <div
           role="menu"
-          className="shadow-popover border-ink-200 absolute right-0 z-30 mt-2 w-60 rounded-xl border bg-white p-1.5"
+          className="shadow-popover border-ink-200 bg-surface absolute right-0 z-30 mt-2 w-60 rounded-xl border p-1.5"
         >
           <div className="border-ink-100 border-b px-2.5 py-2">
             <p className="text-ink-900 truncate text-sm font-semibold">{profile?.full_name}</p>
@@ -112,7 +113,7 @@ function UserMenu() {
             className="text-danger-700 hover:bg-danger-50 flex w-full items-center gap-2 rounded-md px-2.5 py-2 text-sm disabled:opacity-60"
           >
             <LogOut className="size-4" aria-hidden />
-            {signingOut ? 'Signing out…' : 'Sign out'}
+            {signingOut ? 'Signing outâ€¦' : 'Sign out'}
           </button>
         </div>
       ) : null}
@@ -166,7 +167,7 @@ function MobileTabBar({
 }) {
   return (
     <nav
-      className="border-ink-200 fixed inset-x-0 bottom-0 z-30 border-t bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      className="border-ink-200 bg-surface/95 fixed inset-x-0 bottom-0 z-30 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
       aria-label="Quick navigation"
     >
       <ul className="grid grid-cols-5">
@@ -271,7 +272,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
   return (
     <div className="min-h-dvh">
       {/* Desktop sidebar */}
-      <aside className="border-ink-200 fixed inset-y-0 left-0 z-30 hidden w-68 flex-col border-r bg-white lg:flex">
+      <aside className="border-ink-200 bg-surface fixed inset-y-0 left-0 z-30 hidden w-68 flex-col border-r lg:flex">
         <div className="border-ink-100 flex h-16 items-center border-b px-2">{brand}</div>
         <SidebarNav groups={navigation} />
         <div className="border-ink-100 border-t px-4 py-3">
@@ -298,7 +299,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
             aria-hidden
           />
           <div
-            className="relative flex h-full w-80 max-w-[88vw] flex-col bg-white shadow-xl"
+            className="bg-surface relative flex h-full w-80 max-w-[88vw] flex-col shadow-xl"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
@@ -333,7 +334,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
       ) : null}
 
       <div className="lg:pl-68">
-        <header className="border-ink-200/80 sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b bg-white/90 px-4 backdrop-blur sm:px-6">
+        <header className="border-ink-200/80 bg-surface/90 sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b px-4 backdrop-blur sm:px-6">
           <div className="flex min-w-0 items-center gap-2">
             <Button
               variant="ghost"
@@ -353,6 +354,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
           <div className="flex items-center gap-2">
             <ScheduleScopePicker />
             <span className="bg-ink-100 hidden h-6 w-px sm:block" aria-hidden />
+            <ThemeToggle />
             <UserMenu />
           </div>
         </header>

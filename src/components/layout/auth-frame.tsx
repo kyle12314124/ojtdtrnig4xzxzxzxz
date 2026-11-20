@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { env } from '@/lib/env'
+import { ThemeToggle } from '@/components/layout/theme-toggle'
 
 interface AuthFrameProps {
   eyebrow: string
@@ -25,7 +26,7 @@ export function AuthFrame({
 }: AuthFrameProps) {
   return (
     <div className="bg-canvas relative min-h-dvh">
-      <div className="bg-brand-800 pointer-events-none absolute inset-x-0 top-0 h-56" aria-hidden />
+      <div className="bg-brand-950 pointer-events-none absolute inset-x-0 top-0 h-56" aria-hidden />
       <div className="relative mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-8 sm:px-6">
         <header className="flex items-center gap-3 pb-8">
           <span className="flex size-10 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20">
@@ -44,11 +45,12 @@ export function AuthFrame({
             <p className="text-sm font-semibold text-white">{env.appName}</p>
             <p className="text-xs text-white/70">{env.orgName}</p>
           </div>
+          <ThemeToggle className="ml-auto text-white/70 hover:bg-white/10 hover:text-white" />
         </header>
 
         <main className="flex flex-1 items-start justify-center">
           <div className={width === 'lg' ? 'w-full max-w-xl' : 'w-full max-w-md'}>
-            <div className="shadow-card rounded-2xl border border-white/60 bg-white p-6 sm:p-8">
+            <div className="shadow-card bg-surface rounded-2xl border border-white/60 p-6 sm:p-8">
               <p className="text-brand-700 text-xs font-semibold tracking-wider uppercase">
                 {eyebrow}
               </p>

@@ -32,6 +32,7 @@ issuing printable Daily Time Record reports. Built with React, TypeScript, and S
 - Responsive, accessible application shell with role-aware navigation. Phones get a bottom tab bar
   for the four most-used pages plus a "More" drawer, and wide data tables become stacked cards
   below 640px instead of horizontal scrolling.
+- Light and soft-dim themes with a one-click toggle in the header (remembered per device).
 - Branded sign-in flow wired to Supabase Auth, with validation, password visibility, friendly
   error mapping, and a live "configuration required" state.
 - Session restoration, profile loading, role guards, inactive-account blocking, and sign-out.

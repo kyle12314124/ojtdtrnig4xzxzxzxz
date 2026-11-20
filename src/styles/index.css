@@ -38,6 +38,8 @@
 
   /* Semantic accents */
   --color-canvas: #f6f7f3;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8f8f7;
   --color-success-50: #eef7f0;
   --color-success-100: #d9ecdd;
   --color-success-600: #3f7a4d;
@@ -64,6 +66,70 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  /*
+   * Soft dim theme. Same token names as the light theme, so every existing
+   * utility (bg-surface, text-ink-900, border-ink-200, ...) adapts without
+   * touching component code. Deliberately a warm charcoal green, not black.
+   */
+  [data-theme='dim'] {
+    color-scheme: dark;
+
+    --color-canvas: #141814;
+    --color-surface: #1b211c;
+    --color-surface-muted: #222923;
+
+    --color-brand-50: #1a241b;
+    --color-brand-100: #223022;
+    --color-brand-200: #2e4231;
+    --color-brand-300: #3e5a43;
+    --color-brand-400: #6f9277;
+    --color-brand-500: #8cb094;
+    --color-brand-600: #5f8166;
+    --color-brand-700: #7fa387;
+    --color-brand-800: #a3bfa9;
+    --color-brand-900: #c6d9c9;
+    --color-brand-950: #0f1611;
+
+    --color-ink-50: #1e231e;
+    --color-ink-100: #252b25;
+    --color-ink-200: #313831;
+    --color-ink-300: #414941;
+    --color-ink-400: #6f776f;
+    --color-ink-500: #9aa299;
+    --color-ink-600: #b2b9b1;
+    --color-ink-700: #c9cfc8;
+    --color-ink-800: #dde2db;
+    --color-ink-900: #eef1ec;
+    --color-ink-950: #f7f9f5;
+
+    --color-success-50: #15251a;
+    --color-success-100: #1d3423;
+    --color-success-600: #6fae7e;
+    --color-success-700: #8cc79a;
+
+    --color-warning-50: #251d10;
+    --color-warning-100: #342810;
+    --color-warning-600: #d8a33f;
+    --color-warning-700: #e8bd6b;
+
+    --color-danger-50: #271614;
+    --color-danger-100: #3a1e1a;
+    --color-danger-600: #d37064;
+    --color-danger-700: #e39a90;
+
+    --color-info-50: #131f27;
+    --color-info-100: #1b2f3c;
+    --color-info-600: #7aafcb;
+    --color-info-700: #97c4da;
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 1px 3px rgb(0 0 0 / 0.25);
+    --shadow-popover: 0 12px 32px -12px rgb(0 0 0 / 0.6), 0 2px 8px rgb(0 0 0 / 0.35);
+  }
+
   *,
   *::before,
   *::after {
@@ -125,8 +191,26 @@
   }
 }
 
-/* Print: only the dedicated print region is emitted. */
+/* Print: only the dedicated print region is emitted, always on white paper. */
 @media print {
+  :root,
+  [data-theme='dim'] {
+    color-scheme: light;
+    --color-canvas: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8f8f7;
+    --color-ink-50: #f8f8f7;
+    --color-ink-100: #f1f1ef;
+    --color-ink-200: #e4e4e0;
+    --color-ink-300: #d0d0ca;
+    --color-ink-400: #a3a39b;
+    --color-ink-500: #7c7c73;
+    --color-ink-600: #63635b;
+    --color-ink-700: #4f4f49;
+    --color-ink-800: #3a3a36;
+    --color-ink-900: #26262a;
+  }
+
   body {
     background: #fff !important;
   }

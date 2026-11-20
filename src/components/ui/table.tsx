@@ -4,7 +4,10 @@ import { cn } from '@/lib/utils'
 export function TableWrapper({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('border-ink-200 w-full overflow-x-auto rounded-xl border bg-white', className)}
+      className={cn(
+        'border-ink-200 bg-surface w-full overflow-x-auto rounded-xl border',
+        className,
+      )}
       {...props}
     />
   )

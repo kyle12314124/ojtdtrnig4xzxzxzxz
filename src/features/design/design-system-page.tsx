@@ -43,14 +43,14 @@ export function DesignSystemPage() {
       <PageHeader
         eyebrow="Developer"
         title="Design system"
-        description="Living reference for the interface primitives. Sample content only — operational figures always come from the database. This route is compiled only in development builds."
+        description="Living reference for the interface primitives. Sample content only â€” operational figures always come from the database. This route is compiled only in development builds."
       />
 
       <section className="space-y-3">
         <h2 className="text-ink-900 text-sm font-semibold">Palette</h2>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-9">
           {swatches.map(([name, className]) => (
-            <div key={name} className="border-ink-200 overflow-hidden rounded-lg border bg-white">
+            <div key={name} className="border-ink-200 bg-surface overflow-hidden rounded-lg border">
               <div className={`h-12 ${className}`} />
               <p className="text-ink-600 truncate px-2 py-1.5 font-mono text-[10px]">{name}</p>
             </div>
@@ -64,7 +64,7 @@ export function DesignSystemPage() {
           <p className="text-ink-900 text-2xl font-semibold tracking-tight">Page title / 24</p>
           <p className="text-ink-900 text-lg font-semibold">Section title / 18</p>
           <p className="text-ink-700 text-sm">
-            Body copy / 14 — tabular figures: 08:00 AM · 1,234.56
+            Body copy / 14 â€” tabular figures: 08:00 AM Â· 1,234.56
           </p>
           <p className="text-ink-500 text-xs">Secondary caption / 12</p>
         </Card>
@@ -140,7 +140,10 @@ export function DesignSystemPage() {
             <Input id="demo-email" type="email" aria-invalid defaultValue="not-an-email" />
           </Field>
           <Field label="Reason" htmlFor="demo-reason" className="sm:col-span-2">
-            <Textarea id="demo-reason" placeholder="Describe the correction you are requesting…" />
+            <Textarea
+              id="demo-reason"
+              placeholder="Describe the correction you are requestingâ€¦"
+            />
           </Field>
         </Card>
       </section>
@@ -162,7 +165,7 @@ export function DesignSystemPage() {
               {[
                 ['Juan Dela Cruz', 'Nov 18, 2026', '08:01 AM', '05:02 PM', 'present'],
                 ['Maria Santos', 'Nov 18, 2026', '08:17 AM', '05:00 PM', 'late'],
-                ['Alex Reyes', 'Nov 18, 2026', '—', '—', 'absent'],
+                ['Alex Reyes', 'Nov 18, 2026', 'â€”', 'â€”', 'absent'],
               ].map(([name, date, timeIn, timeOut, status]) => (
                 <TableRow key={name}>
                   <TableCell>
@@ -219,9 +222,9 @@ export function DesignSystemPage() {
         >
           <div className="space-y-4">
             <Field label="Reviewer notes" htmlFor="demo-notes">
-              <Textarea id="demo-notes" placeholder="Optional context for the audit log…" />
+              <Textarea id="demo-notes" placeholder="Optional context for the audit logâ€¦" />
             </Field>
-            <Badge tone="warning">Demo only — no data is written</Badge>
+            <Badge tone="warning">Demo only â€” no data is written</Badge>
           </div>
         </Modal>
       </section>

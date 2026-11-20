@@ -47,7 +47,7 @@ export function Textarea({ className, ...props }: ComponentProps<'textarea'>) {
   return (
     <textarea
       className={cn(
-        'border-ink-300 placeholder:text-ink-400 min-h-24 w-full rounded-lg border bg-white px-3 py-2 text-base shadow-xs transition sm:text-sm',
+        'border-ink-300 placeholder:text-ink-400 bg-surface min-h-24 w-full rounded-lg border px-3 py-2 text-base shadow-xs transition sm:text-sm',
         'focus:border-brand-500 focus:ring-brand-500/20 focus:ring-2 focus:outline-none',
         'disabled:bg-ink-50 disabled:text-ink-500 disabled:cursor-not-allowed',
         'aria-invalid:border-danger-500',

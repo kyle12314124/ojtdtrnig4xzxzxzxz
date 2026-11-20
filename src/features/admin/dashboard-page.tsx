@@ -93,7 +93,7 @@ export function AdminDashboardPage() {
       <PageHeader
         eyebrow="Administration"
         title="Dashboard"
-        description="Live attendance from the database — no cached numbers. Filter by schedule to track one group at a time."
+        description="Live attendance from the database â€” no cached numbers. Filter by schedule to track one group at a time."
         actions={
           <>
             <Select
@@ -218,41 +218,47 @@ export function AdminDashboardPage() {
               <div className="h-56 w-full sm:h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e0" vertical={false} />
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="var(--color-ink-200)"
+                      vertical={false}
+                    />
                     <XAxis
                       dataKey="day"
                       tickLine={false}
                       axisLine={false}
                       interval="preserveStartEnd"
                       minTickGap={12}
-                      tick={{ fontSize: 11, fill: '#7c7c73' }}
+                      tick={{ fontSize: 11, fill: 'var(--color-ink-500)' }}
                     />
                     <YAxis
                       allowDecimals={false}
                       tickLine={false}
                       axisLine={false}
-                      tick={{ fontSize: 11, fill: '#7c7c73' }}
+                      tick={{ fontSize: 11, fill: 'var(--color-ink-500)' }}
                     />
                     <Tooltip
                       contentStyle={{
                         borderRadius: 10,
-                        borderColor: '#e4e4e0',
+                        borderColor: 'var(--color-ink-200)',
+                        backgroundColor: 'var(--color-surface)',
+                        color: 'var(--color-ink-700)',
                         fontSize: 12,
                         boxShadow: '0 10px 30px -10px rgb(23 32 25 / 0.18)',
                       }}
                     />
-                    <Legend wrapperStyle={{ fontSize: 12 }} />
+                    <Legend wrapperStyle={{ fontSize: 12, color: 'var(--color-ink-500)' }} />
                     <Bar
                       dataKey="present"
                       name="Present"
-                      fill="#648568"
+                      fill="var(--color-brand-500)"
                       radius={[4, 4, 0, 0]}
                       maxBarSize={26}
                     />
                     <Bar
                       dataKey="late"
                       name="Late"
-                      fill="#a9761b"
+                      fill="var(--color-warning-600)"
                       radius={[4, 4, 0, 0]}
                       maxBarSize={26}
                     />
@@ -339,7 +345,7 @@ export function AdminDashboardPage() {
                         {punch.employee_name}
                       </p>
                       <p className="text-ink-500 mt-0.5 text-xs">
-                        {formatDateOnly(punch.work_date)} · in {formatTime(punch.time_in)}
+                        {formatDateOnly(punch.work_date)} Â· in {formatTime(punch.time_in)}
                       </p>
                     </div>
                     <span className="numeric text-ink-700 shrink-0 text-xs font-medium">

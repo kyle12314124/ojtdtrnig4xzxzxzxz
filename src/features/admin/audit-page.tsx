@@ -34,7 +34,7 @@ function friendly(message: string): string {
 }
 
 function pretty(value: Record<string, unknown> | null): string {
-  if (!value) return '—'
+  if (!value) return 'â€”'
   try {
     return JSON.stringify(value, null, 2)
   } catch {
@@ -122,7 +122,7 @@ export function AuditPage() {
             />
           </div>
           <p className="text-ink-500 text-xs">
-            {loading ? 'Loading…' : pluralize(data?.total ?? 0, 'entry', 'entries')}
+            {loading ? 'Loadingâ€¦' : pluralize(data?.total ?? 0, 'entry', 'entries')}
           </p>
         </CardContent>
       </Card>
@@ -157,13 +157,13 @@ export function AuditPage() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="border-ink-200/80 shadow-card rounded-xl border bg-white p-4"
+                className="border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <Badge tone="brand">{item.action}</Badge>
                     <p className="text-ink-500 mt-1.5 text-xs">
-                      {formatDateTime(item.created_at)} · {item.actor_name ?? 'System'}
+                      {formatDateTime(item.created_at)} Â· {item.actor_name ?? 'System'}
                     </p>
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => setDetail(item)}>
@@ -171,10 +171,10 @@ export function AuditPage() {
                     View
                   </Button>
                 </div>
-                <p className="text-ink-700 mt-2 line-clamp-2 text-xs">{item.summary ?? '—'}</p>
+                <p className="text-ink-700 mt-2 line-clamp-2 text-xs">{item.summary ?? 'â€”'}</p>
                 <p className="text-ink-400 numeric mt-1 truncate text-[11px]">
                   {item.entity_type}
-                  {item.entity_id ? ` · ${item.entity_id}` : ''}
+                  {item.entity_id ? ` Â· ${item.entity_id}` : ''}
                 </p>
               </div>
             ))}
@@ -214,7 +214,7 @@ export function AuditPage() {
                       ) : null}
                     </TableCell>
                     <TableCell className="max-w-xs truncate whitespace-normal">
-                      {item.summary ?? '—'}
+                      {item.summary ?? 'â€”'}
                     </TableCell>
                     <TableCell className="text-right">
                       <Button variant="ghost" size="sm" onClick={() => setDetail(item)}>
@@ -245,7 +245,9 @@ export function AuditPage() {
         open={detail !== null}
         onClose={() => setDetail(null)}
         title="Audit entry"
-        description={detail ? `${detail.action} · ${formatDateTime(detail.created_at)}` : undefined}
+        description={
+          detail ? `${detail.action} Â· ${formatDateTime(detail.created_at)}` : undefined
+        }
         size="lg"
         footer={
           <Button variant="outline" onClick={() => setDetail(null)}>
@@ -267,12 +269,12 @@ export function AuditPage() {
                 <dt className="text-ink-500">Entity</dt>
                 <dd className="text-ink-900 numeric text-xs">
                   {detail.entity_type}
-                  {detail.entity_id ? ` · ${detail.entity_id}` : ''}
+                  {detail.entity_id ? ` Â· ${detail.entity_id}` : ''}
                 </dd>
               </div>
               <div className="px-3 py-2">
                 <dt className="text-ink-500">Summary</dt>
-                <dd className="text-ink-800 mt-1">{detail.summary ?? '—'}</dd>
+                <dd className="text-ink-800 mt-1">{detail.summary ?? 'â€”'}</dd>
               </div>
             </dl>
 

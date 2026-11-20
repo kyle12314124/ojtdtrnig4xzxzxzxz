@@ -7,6 +7,7 @@ import { Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react'
 import { useAuth } from './auth-context'
 import { configIssues, isSupabaseConfigured, env } from '@/lib/env'
 import { errorMessage } from '@/lib/utils'
+import { ThemeToggle } from '@/components/layout/theme-toggle'
 import { Alert } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Field } from '@/components/ui/field'
@@ -99,7 +100,7 @@ export function LoginPage() {
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[1.05fr_1fr]">
       {/* Brand panel */}
-      <aside className="bg-brand-800 relative hidden overflow-hidden px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
+      <aside className="bg-brand-950 relative hidden overflow-hidden px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.14]"
           style={{
@@ -169,7 +170,10 @@ export function LoginPage() {
       </aside>
 
       {/* Form panel */}
-      <main className="flex min-h-dvh flex-col justify-center px-5 py-10 sm:px-10">
+      <main className="relative flex min-h-dvh flex-col justify-center px-5 py-10 sm:px-10">
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
+        </div>
         <div className="mx-auto w-full max-w-md">
           <div className="mb-8 flex items-center gap-3 lg:hidden">
             <span className="bg-brand-600 flex size-10 items-center justify-center rounded-xl text-white">

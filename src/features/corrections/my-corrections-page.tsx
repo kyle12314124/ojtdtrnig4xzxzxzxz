@@ -147,7 +147,7 @@ export function MyCorrectionsPage() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="border-ink-200/80 shadow-card rounded-xl border bg-white p-4"
+                className="border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
@@ -161,8 +161,8 @@ export function MyCorrectionsPage() {
                   <CorrectionBadge status={item.status} />
                 </div>
                 <p className="numeric text-ink-700 mt-2 text-xs">
-                  Requested {item.requested_time_in ? formatTime(item.requested_time_in) : '—'} –{' '}
-                  {item.requested_time_out ? formatTime(item.requested_time_out) : '—'}
+                  Requested {item.requested_time_in ? formatTime(item.requested_time_in) : 'â€”'}{' '}
+                  â€“ {item.requested_time_out ? formatTime(item.requested_time_out) : 'â€”'}
                 </p>
                 <p className="text-ink-600 mt-1 line-clamp-2 text-xs">{item.reason}</p>
                 {item.review_notes ? (
@@ -210,8 +210,8 @@ export function MyCorrectionsPage() {
                     <TableCell>{CORRECTION_TYPE_LABELS[item.correction_type]}</TableCell>
                     <TableCell className="text-xs">
                       <span className="numeric">
-                        {item.requested_time_in ? formatTime(item.requested_time_in) : '—'} –{' '}
-                        {item.requested_time_out ? formatTime(item.requested_time_out) : '—'}
+                        {item.requested_time_in ? formatTime(item.requested_time_in) : 'â€”'} â€“{' '}
+                        {item.requested_time_out ? formatTime(item.requested_time_out) : 'â€”'}
                       </span>
                     </TableCell>
                     <TableCell className="max-w-xs truncate whitespace-normal">
@@ -238,7 +238,7 @@ export function MyCorrectionsPage() {
                           Cancel
                         </Button>
                       ) : (
-                        <span className="text-ink-400 text-xs">—</span>
+                        <span className="text-ink-400 text-xs">â€”</span>
                       )}
                     </TableCell>
                   </TableRow>
