@@ -37,9 +37,9 @@
   --color-ink-950: #17171a;
 
   /* Semantic accents */
-  --color-canvas: #f6f7f3;
+  --color-canvas: #e8ebe2;
   --color-surface: #ffffff;
-  --color-surface-muted: #f8f8f7;
+  --color-surface-muted: #f2f4ee;
   /* Fixed dark surface for brand panels: stays dark in both themes. */
   --color-hero: #22301f;
   --color-success-50: #eef7f0;

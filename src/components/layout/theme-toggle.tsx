@@ -21,7 +21,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => {
     document.documentElement.dataset.theme = mode
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', mode === 'dim' ? '#141814' : '#f6f7f3')
+    if (meta) meta.setAttribute('content', mode === 'dim' ? '#141814' : '#e8ebe2')
     try {
       localStorage.setItem(STORAGE_KEY, mode)
     } catch {
