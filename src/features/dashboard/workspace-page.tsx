@@ -506,13 +506,13 @@ export function WorkspacePage() {
         </div>
       </div>
 
-      <Card className="border-brand-200/70 bg-brand-50/40 p-4 sm:p-5">
+      <Card className="border-brand-500/25 p-4 sm:p-5">
         <div className="flex items-start gap-3">
-          <ShieldCheck className="text-brand-700 mt-0.5 size-5 shrink-0" aria-hidden />
+          <ShieldCheck className="text-brand-500 mt-0.5 size-5 shrink-0" aria-hidden />
           <div>
-            <h3 className="text-brand-900 text-sm font-semibold">Something looks wrong?</h3>
-            <p className="text-brand-800/80 mt-1 text-sm leading-relaxed">
-              Request a correction from <span className="font-medium">My DTR</span>. An
+            <h3 className="text-ink-900 text-sm font-semibold">Something looks wrong?</h3>
+            <p className="text-ink-500 mt-1 text-sm leading-relaxed">
+              Request a correction from <span className="text-ink-800 font-medium">My DTR</span>. An
               administrator reviews it first, and the original punch stays in the audit trail.
             </p>
           </div>
