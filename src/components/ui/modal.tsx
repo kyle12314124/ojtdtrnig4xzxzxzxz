@@ -39,6 +39,9 @@ export function Modal({
   const panelRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
   const descriptionId = useId()
+  // Keep the latest handler without re-running the focus trap on every render.
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
 
   useEffect(() => {
     if (!open) return
@@ -56,7 +59,7 @@ export function Modal({
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape' && !preventClose) {
         event.preventDefault()
-        onClose()
+        onCloseRef.current()
         return
       }
       if (event.key !== 'Tab' || !panelRef.current) return
@@ -84,7 +87,7 @@ export function Modal({
       document.body.style.overflow = originalOverflow
       previouslyFocused?.focus?.()
     }
-  }, [open, onClose, preventClose])
+  }, [open, preventClose])
 
   if (!open) return null
 

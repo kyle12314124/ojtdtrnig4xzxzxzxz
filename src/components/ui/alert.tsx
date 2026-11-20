@@ -34,7 +34,11 @@ interface AlertProps {
 export function Alert({ tone = 'info', title, children, className, action }: AlertProps) {
   return (
     <div
-      className={cn('rounded-lg border px-4 py-3 text-sm', styles[tone].wrap, className)}
+      className={cn(
+        'surface-dark rounded-lg border px-4 py-3 text-sm',
+        styles[tone].wrap,
+        className,
+      )}
       role={tone === 'danger' ? 'alert' : 'status'}
     >
       <div className="flex gap-3">

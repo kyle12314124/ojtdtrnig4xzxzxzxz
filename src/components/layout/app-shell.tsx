@@ -113,7 +113,7 @@ function UserMenu() {
             className="text-danger-700 hover:bg-danger-50 flex w-full items-center gap-2 rounded-md px-2.5 py-2 text-sm disabled:opacity-60"
           >
             <LogOut className="size-4" aria-hidden />
-            {signingOut ? 'Signing outÃ¢â‚¬Â¦' : 'Sign out'}
+            {signingOut ? 'Signing out…' : 'Sign out'}
           </button>
         </div>
       ) : null}

@@ -82,7 +82,7 @@ function TrendBars({ rows }: TrendBarsProps) {
                     : { height: 3 }),
                   animationDelay: `${Math.min(index * 18, 180)}ms`,
                 }}
-                title={`${formatDateOnly(row.work_date)} Â· ${label}${late ? ' Â· Late' : ''}`}
+                title={`${formatDateOnly(row.work_date)} · ${label}${late ? ' · Late' : ''}`}
               />
             </div>
           )
@@ -224,7 +224,7 @@ export function WorkspacePage() {
           <>
             <Link
               to="/dtr"
-              className="border-ink-300 text-ink-700 hover:bg-ink-50 bg-surface inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs"
+              className="border-ink-300 text-ink-700 hover:bg-ink-100 bg-surface-muted inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs transition"
             >
               <FileText className="size-4" aria-hidden />
               My DTR
@@ -232,7 +232,7 @@ export function WorkspacePage() {
             {isAdmin ? (
               <Link
                 to="/admin/dashboard"
-                className="border-ink-300 text-ink-700 hover:bg-ink-50 bg-surface inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs"
+                className="border-ink-300 text-ink-700 hover:bg-ink-100 bg-surface-muted inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm font-medium shadow-xs transition"
               >
                 <CalendarDays className="size-4" aria-hidden />
                 Dashboard
@@ -260,7 +260,7 @@ export function WorkspacePage() {
                 <CardTitle>This month</CardTitle>
                 <p className="text-ink-500 mt-0.5 text-sm">
                   {formatMonth(`${month}-01`)}
-                  {totals ? ` Â· ${pluralize(totals.days_present, 'day')} present` : ''}
+                  {totals ? ` · ${pluralize(totals.days_present, 'day')} present` : ''}
                 </p>
               </div>
               <Link
@@ -317,7 +317,7 @@ export function WorkspacePage() {
                   </p>
                   <p className="text-ink-500 text-[11px]">
                     {pluralize(trendPresentDays, 'day')} present
-                    {trendLateDays > 0 ? ` Â· ${trendLateDays} late` : ''}
+                    {trendLateDays > 0 ? ` · ${trendLateDays} late` : ''}
                   </p>
                 </div>
               ) : null}
@@ -376,11 +376,11 @@ export function WorkspacePage() {
                             : row.sessions
                                 .map(
                                   (session) =>
-                                    `${formatTime(session.time_in)}â€“${
+                                    `${formatTime(session.time_in)}–${
                                       session.time_out ? formatTime(session.time_out) : 'open'
                                     }`,
                                 )
-                                .join(' Â· ')}
+                                .join(' · ')}
                         </p>
                       </div>
                       <div className="flex shrink-0 items-center gap-2.5">
@@ -417,7 +417,7 @@ export function WorkspacePage() {
                   <div>
                     <p className="text-ink-900 text-sm font-semibold">{schedule.name}</p>
                     <p className="text-ink-500 mt-0.5 text-xs">
-                      Grace period {schedule.grace_minutes} min Â·{' '}
+                      Grace period {schedule.grace_minutes} min ·{' '}
                       {schedule.timezone.replace('_', ' ')}
                     </p>
                   </div>
@@ -444,7 +444,7 @@ export function WorkspacePage() {
                   <div className="border-ink-100 space-y-1 rounded-lg border px-3 py-2">
                     {schedule.periods.map((period) => (
                       <p key={period.id} className="text-ink-700 numeric text-xs">
-                        {period.start_time.slice(0, 5)}â€“{period.end_time.slice(0, 5)}
+                        {period.start_time.slice(0, 5)}–{period.end_time.slice(0, 5)}
                         <span className="text-ink-400 ml-1.5 font-sans">{period.label}</span>
                       </p>
                     ))}
@@ -482,24 +482,22 @@ export function WorkspacePage() {
                 <div className="flex items-baseline justify-between gap-3">
                   <dt className="text-ink-500 text-xs">Student no.</dt>
                   <dd className="numeric text-ink-800 font-medium">
-                    {employee?.employee_no ?? 'â€”'}
+                    {employee?.employee_no ?? '—'}
                   </dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-3">
                   <dt className="text-ink-500 text-xs">Position</dt>
-                  <dd className="text-ink-800 truncate font-medium">
-                    {employee?.position ?? 'â€”'}
-                  </dd>
+                  <dd className="text-ink-800 truncate font-medium">{employee?.position ?? '—'}</dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-3">
                   <dt className="text-ink-500 text-xs">Department</dt>
                   <dd className="text-ink-800 truncate font-medium">
-                    {employee?.department?.name ?? 'â€”'}
+                    {employee?.department?.name ?? '—'}
                   </dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-3">
                   <dt className="text-ink-500 text-xs">Role</dt>
-                  <dd className="text-ink-800 font-medium">{role ? ROLE_LABELS[role] : 'â€”'}</dd>
+                  <dd className="text-ink-800 font-medium">{role ? ROLE_LABELS[role] : '—'}</dd>
                 </div>
               </dl>
             </CardContent>

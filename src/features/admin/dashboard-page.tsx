@@ -93,7 +93,7 @@ export function AdminDashboardPage() {
       <PageHeader
         eyebrow="Administration"
         title="Dashboard"
-        description="Live attendance from the database â€” no cached numbers. Filter by schedule to track one group at a time."
+        description="Live attendance from the database — no cached numbers. Filter by schedule to track one group at a time."
         actions={
           <>
             <Select
@@ -345,7 +345,7 @@ export function AdminDashboardPage() {
                         {punch.employee_name}
                       </p>
                       <p className="text-ink-500 mt-0.5 text-xs">
-                        {formatDateOnly(punch.work_date)} Â· in {formatTime(punch.time_in)}
+                        {formatDateOnly(punch.work_date)} · in {formatTime(punch.time_in)}
                       </p>
                     </div>
                     <span className="numeric text-ink-700 shrink-0 text-xs font-medium">

@@ -236,8 +236,8 @@ export function ApprovalsPage() {
           <p className="text-ink-400 mt-3 text-xs">
             {settings
               ? `Applies to every device. Last changed ${formatDateTime(settings.updated_at)}.`
-              : 'Loading current settingâ€¦'}
-            {settings && settings.pending_count > 0 ? ` Â· ${settings.pending_count} pending` : ''}
+              : 'Loading current setting…'}
+            {settings && settings.pending_count > 0 ? ` · ${settings.pending_count} pending` : ''}
           </p>
         </CardContent>
       </Card>
@@ -258,8 +258,7 @@ export function ApprovalsPage() {
           />
         </div>
         <p className="text-ink-500 text-xs">
-          {requests.length} pending Â·{' '}
-          {requests.length === 0 ? 'nothing to review' : 'oldest first'}
+          {requests.length} pending · {requests.length === 0 ? 'nothing to review' : 'oldest first'}
         </p>
       </div>
 
@@ -301,12 +300,12 @@ export function ApprovalsPage() {
             {filtered.map((request) => (
               <div
                 key={request.employee_id}
-                className="border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
+                className="surface-dark border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
               >
                 <p className="text-ink-900 truncate text-sm font-semibold">{request.full_name}</p>
                 <p className="text-ink-500 mt-0.5 truncate text-xs">{request.email}</p>
                 <p className="text-ink-500 numeric mt-1 text-xs">
-                  {request.employee_no} Â· {request.position ?? 'No position'} Â·{' '}
+                  {request.employee_no} · {request.position ?? 'No position'} ·{' '}
                   {request.schedule_name ?? 'Unassigned'}
                 </p>
                 <p className="text-ink-400 mt-1 text-[11px]">
@@ -357,7 +356,7 @@ export function ApprovalsPage() {
                       </div>
                     </TableCell>
                     <TableCell className="numeric font-medium">{request.employee_no}</TableCell>
-                    <TableCell>{request.position ?? 'â€”'}</TableCell>
+                    <TableCell>{request.position ?? '—'}</TableCell>
                     <TableCell>{request.schedule_name ?? 'Unassigned'}</TableCell>
                     <TableCell className="text-ink-500 text-xs">
                       {formatDateTime(request.submitted_at)}

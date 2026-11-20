@@ -212,7 +212,7 @@ export function AttendancePage() {
               <option value="">All students</option>
               {employees.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.last_name}, {item.first_name} Â· {item.employee_no}
+                  {item.last_name}, {item.first_name} · {item.employee_no}
                 </option>
               ))}
             </Select>
@@ -237,7 +237,7 @@ export function AttendancePage() {
           <div className="flex items-end">
             <p className="text-ink-500 text-xs">
               {loading
-                ? 'Loadingâ€¦'
+                ? 'Loading…'
                 : `${pluralize(data?.total ?? 0, 'record')}${
                     activeSchedule ? ` in ${activeSchedule.name}` : ''
                   }`}
@@ -272,7 +272,7 @@ export function AttendancePage() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
+                className="surface-dark border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
@@ -280,7 +280,7 @@ export function AttendancePage() {
                       {item.employee_name}
                     </p>
                     <p className="text-ink-500 numeric mt-0.5 text-xs">
-                      {formatDateOnly(item.work_date)} Â· {item.employee_no}
+                      {formatDateOnly(item.work_date)} · {item.employee_no}
                     </p>
                   </div>
                   <AttendanceBadge status={item.status} />
@@ -288,7 +288,7 @@ export function AttendancePage() {
 
                 <div className="mt-3 flex items-center justify-between gap-2">
                   <p className="numeric text-ink-700 text-xs">
-                    {formatTime(item.first_time_in)} â€“{' '}
+                    {formatTime(item.first_time_in)} –{' '}
                     {item.last_time_out ? (
                       formatTime(item.last_time_out)
                     ) : (
@@ -387,13 +387,13 @@ export function AttendancePage() {
                       {formatMinutes(item.worked_minutes)}
                     </TableCell>
                     <TableCell className="numeric text-warning-700 text-right">
-                      {item.late_minutes ? formatMinutes(item.late_minutes) : 'â€”'}
+                      {item.late_minutes ? formatMinutes(item.late_minutes) : '—'}
                     </TableCell>
                     <TableCell className="numeric text-danger-700 text-right">
-                      {item.undertime_minutes ? formatMinutes(item.undertime_minutes) : 'â€”'}
+                      {item.undertime_minutes ? formatMinutes(item.undertime_minutes) : '—'}
                     </TableCell>
                     <TableCell className="numeric text-success-700 text-right">
-                      {item.overtime_minutes ? formatMinutes(item.overtime_minutes) : 'â€”'}
+                      {item.overtime_minutes ? formatMinutes(item.overtime_minutes) : '—'}
                     </TableCell>
                     <TableCell>
                       <AttendanceBadge status={item.status} />
@@ -456,7 +456,7 @@ export function AttendancePage() {
         title="Delete attendance day"
         description={
           deleteTarget
-            ? `${deleteTarget.employee_name} Â· ${formatDateOnly(deleteTarget.work_date)}`
+            ? `${deleteTarget.employee_name} · ${formatDateOnly(deleteTarget.work_date)}`
             : undefined
         }
         size="sm"

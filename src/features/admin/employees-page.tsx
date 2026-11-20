@@ -286,7 +286,7 @@ export function EmployeesPage() {
       return
     }
     if (!/^[A-Za-z0-9-]{2,12}$/.test(newDepartment.code.trim())) {
-      setDepartmentError('Use a 2â€“12 character code with letters, numbers, or hyphens.')
+      setDepartmentError('Use a 2–12 character code with letters, numbers, or hyphens.')
       return
     }
 
@@ -396,7 +396,7 @@ export function EmployeesPage() {
           </div>
 
           <p className="text-ink-500 ml-auto text-xs">
-            {loading ? 'Loadingâ€¦' : pluralize(total, 'record')}
+            {loading ? 'Loading…' : pluralize(total, 'record')}
           </p>
         </CardContent>
       </Card>
@@ -429,7 +429,7 @@ export function EmployeesPage() {
               return (
                 <div
                   key={item.id}
-                  className="border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
+                  className="surface-dark border-ink-200/80 shadow-card bg-surface rounded-xl border p-4"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
@@ -438,7 +438,7 @@ export function EmployeesPage() {
                         {isSelf ? <span className="text-ink-400 ml-1.5 text-xs">(you)</span> : null}
                       </p>
                       <p className="text-ink-500 mt-0.5 truncate text-xs">
-                        <span className="numeric">{item.employee_no}</span> Â· {item.email}
+                        <span className="numeric">{item.employee_no}</span> · {item.email}
                       </p>
                     </div>
                     <Badge tone={statusTone(item.status)} dot>
@@ -449,11 +449,11 @@ export function EmployeesPage() {
                   <dl className="text-ink-600 mt-2.5 space-y-1 text-xs">
                     <div className="flex justify-between gap-2">
                       <dt className="text-ink-500">Position</dt>
-                      <dd className="truncate">{item.position ?? 'â€”'}</dd>
+                      <dd className="truncate">{item.position ?? '—'}</dd>
                     </div>
                     <div className="flex justify-between gap-2">
                       <dt className="text-ink-500">Department</dt>
-                      <dd className="truncate">{item.department?.name ?? 'â€”'}</dd>
+                      <dd className="truncate">{item.department?.name ?? '—'}</dd>
                     </div>
                     <div className="flex justify-between gap-2">
                       <dt className="text-ink-500">Schedule</dt>
@@ -523,15 +523,15 @@ export function EmployeesPage() {
                             ) : null}
                           </p>
                           <p className="text-ink-500 text-xs">
-                            <span className="numeric">{item.employee_no}</span> Â· {item.email}
+                            <span className="numeric">{item.employee_no}</span> · {item.email}
                           </p>
                         </div>
                       </TableCell>
-                      <TableCell>{item.department?.name ?? 'â€”'}</TableCell>
+                      <TableCell>{item.department?.name ?? '—'}</TableCell>
                       <TableCell>
-                        <p>{item.position ?? 'â€”'}</p>
+                        <p>{item.position ?? '—'}</p>
                         <p className="text-ink-500 text-xs">
-                          {EMPLOYMENT_TYPE_LABELS[item.employment_type]} Â· hired{' '}
+                          {EMPLOYMENT_TYPE_LABELS[item.employment_type]} · hired{' '}
                           {formatDateOnly(item.date_hired)}
                         </p>
                       </TableCell>
@@ -782,7 +782,7 @@ export function EmployeesPage() {
         title="Assign work schedule"
         description={
           scheduleTarget
-            ? `${scheduleTarget.first_name} ${scheduleTarget.last_name} â€” the change starts today.`
+            ? `${scheduleTarget.first_name} ${scheduleTarget.last_name} — the change starts today.`
             : undefined
         }
         size="sm"
@@ -805,7 +805,7 @@ export function EmployeesPage() {
         <div className="space-y-4">
           {schedules.length === 0 ? (
             <Alert tone="warning" title="No schedules available">
-              Create a work schedule first from Administration â†’ Work schedules.
+              Create a work schedule first from Administration → Work schedules.
             </Alert>
           ) : (
             <Field label="Schedule" htmlFor="assign-schedule" required>
@@ -873,7 +873,7 @@ export function EmployeesPage() {
           <Field
             label="Code"
             htmlFor="department-code"
-            hint="2â€“12 characters: letters, numbers, or hyphens."
+            hint="2–12 characters: letters, numbers, or hyphens."
             required
           >
             <Input

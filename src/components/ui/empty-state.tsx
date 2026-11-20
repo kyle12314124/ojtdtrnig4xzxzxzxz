@@ -42,9 +42,9 @@ export function ErrorState({
   action?: ReactNode
 }) {
   return (
-    <div className="border-danger-200 bg-danger-50/50 flex flex-col items-center rounded-xl border px-6 py-10 text-center">
+    <div className="surface-dark border-danger-600/35 bg-surface flex flex-col items-center rounded-xl border px-6 py-10 text-center">
       <h3 className="text-danger-700 text-sm font-semibold">{title}</h3>
-      <p className="text-danger-700/80 mt-1 max-w-md text-sm">{description}</p>
+      <p className="text-ink-500 mt-1 max-w-md text-sm">{description}</p>
       {action ? <div className="mt-4">{action}</div> : null}
     </div>
   )
