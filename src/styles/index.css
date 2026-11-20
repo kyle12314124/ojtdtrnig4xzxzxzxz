@@ -40,6 +40,8 @@
   --color-canvas: #f6f7f3;
   --color-surface: #ffffff;
   --color-surface-muted: #f8f8f7;
+  /* Fixed dark surface for brand panels: stays dark in both themes. */
+  --color-hero: #22301f;
   --color-success-50: #eef7f0;
   --color-success-100: #d9ecdd;
   --color-success-600: #3f7a4d;
@@ -176,6 +178,69 @@
   }
 }
 
+@layer components {
+  /*
+   * Dark card surface on the light canvas. Re-declaring the tokens here means
+   * every utility used *inside* a card (text-ink-900, bg-ink-50, badges,
+   * charts) resolves against the dark scale automatically, because custom
+   * properties inherit. No per-component color edits required.
+   */
+  .surface-dark {
+    color-scheme: dark;
+
+    --color-surface: #1b211c;
+    --color-surface-muted: #222923;
+
+    --color-brand-50: #1a241b;
+    --color-brand-100: #223022;
+    --color-brand-200: #2e4231;
+    --color-brand-300: #3e5a43;
+    --color-brand-400: #6f9277;
+    --color-brand-500: #8cb094;
+    --color-brand-600: #5f8166;
+    --color-brand-700: #7fa387;
+    --color-brand-800: #a3bfa9;
+    --color-brand-900: #c6d9c9;
+
+    --color-ink-50: #20261f;
+    --color-ink-100: #272e27;
+    --color-ink-200: #333b33;
+    --color-ink-300: #454e45;
+    --color-ink-400: #8a938a;
+    --color-ink-500: #a3aba2;
+    --color-ink-600: #b9c0b8;
+    --color-ink-700: #ccd3cb;
+    --color-ink-800: #dee4dc;
+    --color-ink-900: #eff2ed;
+    --color-ink-950: #f8faf6;
+
+    --color-success-50: #15251a;
+    --color-success-100: #1d3423;
+    --color-success-600: #6fae7e;
+    --color-success-700: #8cc79a;
+
+    --color-warning-50: #251d10;
+    --color-warning-100: #342810;
+    --color-warning-600: #d8a33f;
+    --color-warning-700: #e8bd6b;
+
+    --color-danger-50: #271614;
+    --color-danger-100: #3a1e1a;
+    --color-danger-600: #d37064;
+    --color-danger-700: #e39a90;
+
+    --color-info-50: #131f27;
+    --color-info-100: #1b2f3c;
+    --color-info-600: #7aafcb;
+    --color-info-700: #97c4da;
+
+    --shadow-card: 0 10px 28px -18px rgb(10 14 10 / 0.45), 0 2px 6px rgb(10 14 10 / 0.18);
+    --shadow-popover: 0 14px 36px -14px rgb(10 14 10 / 0.55), 0 2px 8px rgb(10 14 10 / 0.28);
+
+    color: var(--color-ink-800);
+  }
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -194,7 +259,8 @@
 /* Print: only the dedicated print region is emitted, always on white paper. */
 @media print {
   :root,
-  [data-theme='dim'] {
+  [data-theme='dim'],
+  .surface-dark {
     color-scheme: light;
     --color-canvas: #ffffff;
     --color-surface: #ffffff;
@@ -209,6 +275,35 @@
     --color-ink-700: #4f4f49;
     --color-ink-800: #3a3a36;
     --color-ink-900: #26262a;
+    --color-ink-950: #17171a;
+
+    --color-brand-50: #f3f7f3;
+    --color-brand-100: #e5ede6;
+    --color-brand-200: #cddbd0;
+    --color-brand-500: #648568;
+    --color-brand-600: #4e6a53;
+    --color-brand-700: #405543;
+    --color-brand-800: #364538;
+
+    --color-success-50: #eef6ee;
+    --color-success-100: #dcecdf;
+    --color-success-600: #2f7a43;
+    --color-success-700: #276637;
+
+    --color-warning-50: #fdf6e6;
+    --color-warning-100: #f8ead0;
+    --color-warning-600: #a9761b;
+    --color-warning-700: #8a5f14;
+
+    --color-danger-50: #fdf0ee;
+    --color-danger-100: #f8ded9;
+    --color-danger-600: #b4453a;
+    --color-danger-700: #97372e;
+
+    --color-info-50: #eef4f8;
+    --color-info-100: #dbe8f0;
+    --color-info-600: #2f6d8c;
+    --color-info-700: #265a75;
   }
 
   body {

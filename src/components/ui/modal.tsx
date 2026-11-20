@@ -105,7 +105,7 @@ export function Modal({
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={cn(
-          'shadow-popover bg-surface relative flex max-h-[calc(100dvh-1rem)] w-full flex-col rounded-t-2xl outline-none sm:rounded-2xl',
+          'surface-dark shadow-popover bg-surface relative flex max-h-[calc(100dvh-1rem)] w-full flex-col rounded-t-2xl outline-none sm:rounded-2xl',
           sizes[size],
         )}
       >

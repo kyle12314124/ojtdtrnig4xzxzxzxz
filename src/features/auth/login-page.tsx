@@ -100,7 +100,7 @@ export function LoginPage() {
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[1.05fr_1fr]">
       {/* Brand panel */}
-      <aside className="bg-brand-950 relative hidden overflow-hidden px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
+      <aside className="bg-hero relative hidden overflow-hidden px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.14]"
           style={{

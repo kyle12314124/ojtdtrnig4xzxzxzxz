@@ -26,10 +26,9 @@ export function AuthFrame({
 }: AuthFrameProps) {
   return (
     <div className="bg-canvas relative min-h-dvh">
-      <div className="bg-brand-950 pointer-events-none absolute inset-x-0 top-0 h-56" aria-hidden />
       <div className="relative mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-8 sm:px-6">
         <header className="flex items-center gap-3 pb-8">
-          <span className="flex size-10 items-center justify-center rounded-xl bg-white/12 text-white ring-1 ring-white/20">
+          <span className="bg-brand-600 flex size-10 items-center justify-center rounded-xl text-white">
             <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden>
               <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.7" />
               <path
@@ -42,15 +41,15 @@ export function AuthFrame({
             </svg>
           </span>
           <div>
-            <p className="text-sm font-semibold text-white">{env.appName}</p>
-            <p className="text-xs text-white/70">{env.orgName}</p>
+            <p className="text-ink-900 text-sm font-semibold">{env.appName}</p>
+            <p className="text-ink-500 text-xs">{env.orgName}</p>
           </div>
-          <ThemeToggle className="ml-auto text-white/70 hover:bg-white/10 hover:text-white" />
+          <ThemeToggle className="ml-auto" />
         </header>
 
         <main className="flex flex-1 items-start justify-center">
           <div className={width === 'lg' ? 'w-full max-w-xl' : 'w-full max-w-md'}>
-            <div className="shadow-card bg-surface rounded-2xl border border-white/60 p-6 sm:p-8">
+            <div className="surface-dark border-ink-200/70 shadow-card bg-surface rounded-2xl border p-6 sm:p-8">
               <p className="text-brand-700 text-xs font-semibold tracking-wider uppercase">
                 {eyebrow}
               </p>

@@ -7,12 +7,13 @@ type ThemeMode = 'light' | 'dim'
 const STORAGE_KEY = 'dtr.theme'
 
 function readMode(): ThemeMode {
-  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dim'
+  return document.documentElement.dataset.theme === 'dim' ? 'dim' : 'light'
 }
 
 /**
- * Switches between the light sage theme and the soft dim theme. The initial
- * value is applied by an inline script in index.html so there is no flash.
+ * Switches between the light canvas theme (dark cards) and the all-dark soft
+ * dim theme. The initial value is applied by an inline script in index.html so
+ * there is no flash of the wrong palette.
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const [mode, setMode] = useState<ThemeMode>(readMode)
@@ -20,7 +21,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   useEffect(() => {
     document.documentElement.dataset.theme = mode
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', mode === 'dim' ? '#141814' : '#f6f7f4')
+    if (meta) meta.setAttribute('content', mode === 'dim' ? '#141814' : '#f6f7f3')
     try {
       localStorage.setItem(STORAGE_KEY, mode)
     } catch {

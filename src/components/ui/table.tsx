@@ -5,7 +5,7 @@ export function TableWrapper({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'border-ink-200 bg-surface w-full overflow-x-auto rounded-xl border',
+        'surface-dark border-ink-200 bg-surface w-full overflow-x-auto rounded-xl border',
         className,
       )}
       {...props}
