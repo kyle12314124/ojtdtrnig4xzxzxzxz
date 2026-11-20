@@ -6,6 +6,7 @@ import {
   CalendarDays,
   FileText,
   ShieldCheck,
+  TrendingUp,
   UserRound,
 } from 'lucide-react'
 import { useAuth } from '@/features/auth/auth-context'
@@ -20,9 +21,17 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PageHeader } from '@/components/ui/page-header'
 import { Skeleton } from '@/components/ui/spinner'
-import type { DtrPayload } from '@/types'
+import type { DtrPayload, DtrRow } from '@/types'
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+const TREND_DAYS = 14
+
+function shiftDayKey(dayKey: string, delta: number): string {
+  const date = new Date(`${dayKey}T12:00:00Z`)
+  date.setUTCDate(date.getUTCDate() + delta)
+  return date.toISOString().slice(0, 10)
+}
 
 function monthKeys(month: string): { start: string; end: string } {
   const year = Number(month.slice(0, 4))
@@ -41,12 +50,86 @@ function weekdayLabel(dayKey: string): string {
   })
 }
 
+interface TrendBarsProps {
+  rows: DtrRow[]
+}
+
+/** Lightweight CSS bar chart: no chart library, so the student bundle stays small. */
+function TrendBars({ rows }: TrendBarsProps) {
+  const scale = Math.max(8 * 60, ...rows.map((row) => row.record?.worked_minutes ?? 0))
+
+  return (
+    <div>
+      <div
+        className="flex h-28 items-end gap-[3px] sm:h-32 sm:gap-1.5"
+        role="img"
+        aria-label="Hours worked on each of the last 14 days"
+      >
+        {rows.map((row) => {
+          const minutes = row.record?.worked_minutes ?? 0
+          const late = row.record?.status === 'late'
+          const tone = late ? 'bg-warning-500' : minutes > 0 ? 'bg-brand-500' : 'bg-ink-200'
+          const label =
+            minutes > 0 ? formatMinutes(minutes) : row.is_work_day ? 'No punch' : 'Rest day'
+
+          return (
+            <div key={row.work_date} className="flex h-full flex-1 flex-col justify-end">
+              <div
+                className={`w-full rounded-t-sm transition-colors ${tone}`}
+                style={
+                  minutes > 0
+                    ? { height: `${Math.max(4, Math.round((minutes / scale) * 100))}%` }
+                    : { height: 3 }
+                }
+                title={`${formatDateOnly(row.work_date)} · ${label}${late ? ' · Late' : ''}`}
+              />
+            </div>
+          )
+        })}
+      </div>
+
+      <div className="mt-1.5 flex gap-[3px] sm:gap-1.5">
+        {rows.map((row, index) => {
+          const day = Number(row.work_date.slice(8, 10))
+          return (
+            <span
+              key={row.work_date}
+              className="text-ink-400 flex-1 text-center text-[9px] sm:text-[10px]"
+            >
+              <span className="hidden sm:inline">{day}</span>
+              <span className="sm:hidden">{index % 2 === 0 ? day : ''}</span>
+            </span>
+          )
+        })}
+      </div>
+
+      <div className="text-ink-500 mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px]">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="bg-brand-500 size-2 rounded-sm" aria-hidden />
+          On time
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="bg-warning-500 size-2 rounded-sm" aria-hidden />
+          Late
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="bg-ink-200 size-2 rounded-sm" aria-hidden />
+          No punch
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export function WorkspacePage() {
   const { profile, employee, role, isAdmin, signOut } = useAuth()
   const month = todayKey().slice(0, 7)
   const [summary, setSummary] = useState<DtrPayload | null>(null)
   const [summaryLoading, setSummaryLoading] = useState(true)
   const [summaryError, setSummaryError] = useState<string | null>(null)
+  const [trend, setTrend] = useState<DtrPayload | null>(null)
+  const [trendLoading, setTrendLoading] = useState(true)
+  const [trendError, setTrendError] = useState<string | null>(null)
 
   const loadSummary = useCallback(async () => {
     if (!employee?.id) {
@@ -74,12 +157,46 @@ export function WorkspacePage() {
     void loadSummary()
   }, [loadSummary])
 
+  const loadTrend = useCallback(async () => {
+    if (!employee?.id) {
+      setTrendLoading(false)
+      return
+    }
+    const end = todayKey()
+    const start = shiftDayKey(end, -(TREND_DAYS - 1))
+    try {
+      const { data, error } = await getSupabase().rpc('get_dtr', {
+        p_employee_id: employee.id,
+        p_start: start,
+        p_end: end,
+      })
+      if (error) throw error
+      setTrend(data as DtrPayload)
+      setTrendError(null)
+    } catch (caught) {
+      setTrendError(errorMessage(caught))
+    } finally {
+      setTrendLoading(false)
+    }
+  }, [employee?.id])
+
+  useEffect(() => {
+    void loadTrend()
+  }, [loadTrend])
+
   const schedule = employee?.schedule ?? null
   const totals = summary?.totals
   const recent = (summary?.rows ?? [])
     .filter((row) => row.record !== null || row.sessions.length > 0)
     .slice(-5)
     .reverse()
+
+  const trendRows = trend?.rows ?? []
+  const trendMinutes = trendRows.reduce((sum, row) => sum + (row.record?.worked_minutes ?? 0), 0)
+  const trendLateDays = trendRows.filter((row) => row.record?.status === 'late').length
+  const trendPresentDays = trendRows.filter(
+    (row) => row.record && row.record.status !== 'absent' && row.record.status !== 'on_leave',
+  ).length
 
   const glance = [
     { label: 'Worked', value: formatMinutes(totals?.worked_minutes ?? 0), tone: 'text-ink-900' },
@@ -127,7 +244,12 @@ export function WorkspacePage() {
         }
       />
 
-      <TimeClock onChanged={() => void loadSummary()} />
+      <TimeClock
+        onChanged={() => {
+          void loadSummary()
+          void loadTrend()
+        }}
+      />
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">
@@ -172,6 +294,44 @@ export function WorkspacePage() {
                     </div>
                   ))}
                 </dl>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="text-brand-600 size-4" aria-hidden />
+                  Last {TREND_DAYS} days
+                </CardTitle>
+                <p className="text-ink-500 mt-0.5 text-sm">
+                  Hours worked each day. Amber bars are late arrivals.
+                </p>
+              </div>
+              {!trendLoading && !trendError && trendRows.length > 0 ? (
+                <div className="shrink-0 text-right">
+                  <p className="numeric text-ink-900 text-sm font-semibold">
+                    {formatMinutes(trendMinutes)}
+                  </p>
+                  <p className="text-ink-500 text-[11px]">
+                    {pluralize(trendPresentDays, 'day')} present
+                    {trendLateDays > 0 ? ` · ${trendLateDays} late` : ''}
+                  </p>
+                </div>
+              ) : null}
+            </CardHeader>
+            <CardContent>
+              {trendError ? (
+                <p className="text-ink-500 text-sm">Could not load your trend right now.</p>
+              ) : trendLoading ? (
+                <Skeleton className="h-32 w-full" />
+              ) : trendRows.length === 0 ? (
+                <p className="text-ink-500 text-sm">
+                  No days to show yet. Time in above to start your record.
+                </p>
+              ) : (
+                <TrendBars rows={trendRows} />
               )}
             </CardContent>
           </Card>
