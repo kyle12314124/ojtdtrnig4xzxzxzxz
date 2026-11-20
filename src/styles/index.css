@@ -28,8 +28,8 @@
   --color-ink-100: #f1f1ef;
   --color-ink-200: #e4e4e0;
   --color-ink-300: #d0d0ca;
-  --color-ink-400: #a3a39b;
-  --color-ink-500: #7c7c73;
+  --color-ink-400: #8d8d85;
+  --color-ink-500: #66665e;
   --color-ink-600: #63635b;
   --color-ink-700: #4f4f49;
   --color-ink-800: #3a3a36;
@@ -37,9 +37,9 @@
   --color-ink-950: #17171a;
 
   /* Semantic accents */
-  --color-canvas: #e8ebe2;
+  --color-canvas: #d9dfd1;
   --color-surface: #ffffff;
-  --color-surface-muted: #f2f4ee;
+  --color-surface-muted: #e7ebdf;
   /* Fixed dark surface for brand panels: stays dark in both themes. */
   --color-hero: #22301f;
   --color-success-50: #eef7f0;
