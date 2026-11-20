@@ -6,19 +6,19 @@ type AlertTone = 'info' | 'success' | 'warning' | 'danger'
 
 const styles: Record<AlertTone, { wrap: string; icon: ReactNode }> = {
   info: {
-    wrap: 'border-info-100 bg-info-50 text-info-700',
+    wrap: 'border-info-100 bg-info-50/70 text-info-700',
     icon: <Info className="size-4 shrink-0" aria-hidden />,
   },
   success: {
-    wrap: 'border-success-100 bg-success-50 text-success-700',
+    wrap: 'border-success-100 bg-success-50/70 text-success-700',
     icon: <CheckCircle2 className="size-4 shrink-0" aria-hidden />,
   },
   warning: {
-    wrap: 'border-warning-100 bg-warning-50 text-warning-700',
+    wrap: 'border-warning-100 bg-warning-50/70 text-warning-700',
     icon: <AlertTriangle className="size-4 shrink-0" aria-hidden />,
   },
   danger: {
-    wrap: 'border-danger-100 bg-danger-50 text-danger-700',
+    wrap: 'border-danger-100 bg-danger-50/70 text-danger-700',
     icon: <XCircle className="size-4 shrink-0" aria-hidden />,
   },
 }

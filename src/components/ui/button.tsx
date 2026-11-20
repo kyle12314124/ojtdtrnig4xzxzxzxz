@@ -44,7 +44,7 @@ export function Button({
     <button
       type={props.type ?? 'button'}
       className={cn(
-        'inline-flex shrink-0 items-center justify-center font-medium whitespace-nowrap transition-colors',
+        'inline-flex shrink-0 items-center justify-center font-medium whitespace-nowrap transition duration-150 active:scale-[0.985]',
         'focus-visible:ring-brand-500/40 focus-visible:ring-2 focus-visible:ring-offset-1',
         'disabled:pointer-events-none disabled:opacity-70',
         '[&_svg]:size-4 [&_svg]:shrink-0',

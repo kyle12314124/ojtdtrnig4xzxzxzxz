@@ -38,7 +38,7 @@ export function SidebarNav({ groups, onNavigate }: SidebarNavProps) {
                   onClick={onNavigate}
                   className={({ isActive }) =>
                     cn(
-                      'group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                      'group focus-visible:ring-brand-500/40 flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none',
                       isActive
                         ? 'bg-brand-600 text-white shadow-xs'
                         : 'text-ink-600 hover:bg-brand-50 hover:text-brand-900',

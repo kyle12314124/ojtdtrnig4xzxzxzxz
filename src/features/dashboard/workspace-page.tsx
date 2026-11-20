@@ -65,7 +65,7 @@ function TrendBars({ rows }: TrendBarsProps) {
         role="img"
         aria-label="Hours worked on each of the last 14 days"
       >
-        {rows.map((row) => {
+        {rows.map((row, index) => {
           const minutes = row.record?.worked_minutes ?? 0
           const late = row.record?.status === 'late'
           const tone = late ? 'bg-warning-500' : minutes > 0 ? 'bg-brand-500' : 'bg-ink-200'
@@ -75,12 +75,13 @@ function TrendBars({ rows }: TrendBarsProps) {
           return (
             <div key={row.work_date} className="flex h-full flex-1 flex-col justify-end">
               <div
-                className={`w-full rounded-t-sm transition-colors ${tone}`}
-                style={
-                  minutes > 0
+                className={`animate-bar-in w-full rounded-t-sm transition-colors ${tone}`}
+                style={{
+                  ...(minutes > 0
                     ? { height: `${Math.max(4, Math.round((minutes / scale) * 100))}%` }
-                    : { height: 3 }
-                }
+                    : { height: 3 }),
+                  animationDelay: `${Math.min(index * 18, 180)}ms`,
+                }}
                 title={`${formatDateOnly(row.work_date)} Â· ${label}${late ? ' Â· Late' : ''}`}
               />
             </div>
@@ -237,7 +238,7 @@ export function WorkspacePage() {
                 Dashboard
               </Link>
             ) : null}
-            <Button variant="outline" onClick={() => void signOut()}>
+            <Button variant="ghost" onClick={() => void signOut()}>
               Sign out
             </Button>
           </>

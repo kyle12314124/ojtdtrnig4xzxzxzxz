@@ -28,8 +28,8 @@
   --color-ink-100: #f1f1ef;
   --color-ink-200: #e4e4e0;
   --color-ink-300: #d0d0ca;
-  --color-ink-400: #8d8d85;
-  --color-ink-500: #66665e;
+  --color-ink-400: #7a7d76;
+  --color-ink-500: #5f625b;
   --color-ink-600: #63635b;
   --color-ink-700: #4f4f49;
   --color-ink-800: #3a3a36;
@@ -37,9 +37,9 @@
   --color-ink-950: #17171a;
 
   /* Semantic accents */
-  --color-canvas: #d9dfd1;
+  --color-canvas: #dfe1da;
   --color-surface: #ffffff;
-  --color-surface-muted: #e7ebdf;
+  --color-surface-muted: #e9eae3;
   /* Fixed dark surface for brand panels: stays dark in both themes. */
   --color-hero: #22301f;
   --color-success-50: #eef7f0;
@@ -241,6 +241,67 @@
   }
 }
 
+/* Motion ------------------------------------------------------------------ */
+@keyframes dtr-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dtr-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dtr-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes dtr-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dtr-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dtr-bar-in {
+  from {
+    transform: scaleY(0.02);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -253,6 +314,45 @@
   .numeric {
     font-variant-numeric: tabular-nums;
     font-feature-settings: 'tnum';
+  }
+
+  .animate-fade-in {
+    animation: dtr-fade-in 0.18s ease-out both;
+  }
+  .animate-page-in {
+    animation: dtr-page-in 0.26s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .animate-slide-in-left {
+    animation: dtr-slide-in-left 0.24s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .animate-pop-in {
+    animation: dtr-pop-in 0.16s ease-out both;
+  }
+  .animate-modal-in {
+    animation: dtr-modal-in 0.2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .animate-bar-in {
+    transform-origin: bottom;
+    animation: dtr-bar-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-page-in,
+  .animate-slide-in-left,
+  .animate-pop-in,
+  .animate-modal-in,
+  .animate-bar-in {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 

@@ -91,7 +91,7 @@ export function Modal({
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       <div
-        className="bg-ink-950/40 absolute inset-0 backdrop-blur-[2px]"
+        className="bg-ink-950/40 animate-fade-in absolute inset-0 backdrop-blur-[2px]"
         aria-hidden
         onClick={() => {
           if (closeOnOverlay && !preventClose) onClose()
@@ -105,7 +105,7 @@ export function Modal({
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={cn(
-          'surface-dark shadow-popover bg-surface relative flex max-h-[calc(100dvh-1rem)] w-full flex-col rounded-t-2xl outline-none sm:rounded-2xl',
+          'surface-dark shadow-popover bg-surface animate-modal-in relative flex max-h-[calc(100dvh-1rem)] w-full flex-col rounded-t-2xl outline-none sm:rounded-2xl',
           sizes[size],
         )}
       >

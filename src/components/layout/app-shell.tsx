@@ -90,7 +90,7 @@ function UserMenu() {
       {open ? (
         <div
           role="menu"
-          className="shadow-popover border-ink-200 bg-surface absolute right-0 z-30 mt-2 w-60 rounded-xl border p-1.5"
+          className="shadow-popover border-ink-200 bg-surface animate-pop-in absolute right-0 z-30 mt-2 w-60 rounded-xl border p-1.5"
         >
           <div className="border-ink-100 border-b px-2.5 py-2">
             <p className="text-ink-900 truncate text-sm font-semibold">{profile?.full_name}</p>
@@ -113,7 +113,7 @@ function UserMenu() {
             className="text-danger-700 hover:bg-danger-50 flex w-full items-center gap-2 rounded-md px-2.5 py-2 text-sm disabled:opacity-60"
           >
             <LogOut className="size-4" aria-hidden />
-            {signingOut ? 'Signing outâ€¦' : 'Sign out'}
+            {signingOut ? 'Signing outÃ¢â‚¬Â¦' : 'Sign out'}
           </button>
         </div>
       ) : null}
@@ -167,7 +167,7 @@ function MobileTabBar({
 }) {
   return (
     <nav
-      className="border-ink-200 bg-surface/95 fixed inset-x-0 bottom-0 z-30 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      className="border-ink-300/50 bg-canvas fixed inset-x-0 bottom-0 z-30 border-t pb-[env(safe-area-inset-bottom)] lg:hidden"
       aria-label="Quick navigation"
     >
       <ul className="grid grid-cols-5">
@@ -189,7 +189,7 @@ function MobileTabBar({
                 <span
                   className={cn(
                     'flex size-8 items-center justify-center rounded-lg',
-                    active && 'bg-brand-50',
+                    active && 'bg-brand-600/15',
                   )}
                 >
                   <item.icon className="size-[18px]" aria-hidden />
@@ -272,10 +272,10 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
   return (
     <div className="min-h-dvh">
       {/* Desktop sidebar */}
-      <aside className="border-ink-200 bg-surface fixed inset-y-0 left-0 z-30 hidden w-68 flex-col border-r lg:flex">
-        <div className="border-ink-100 flex h-16 items-center border-b px-2">{brand}</div>
+      <aside className="border-ink-300/50 bg-canvas fixed inset-y-0 left-0 z-30 hidden w-68 flex-col border-r lg:flex">
+        <div className="border-ink-300/50 flex h-16 items-center border-b px-2">{brand}</div>
         <SidebarNav groups={navigation} />
-        <div className="border-ink-100 border-t px-4 py-3">
+        <div className="border-ink-300/50 border-t px-4 py-3">
           <p className="text-ink-400 text-[10px] font-medium tracking-wider uppercase">
             {env.timezone.replace('_', ' ')}
           </p>
@@ -294,17 +294,17 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
       {mobileOpen ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="bg-ink-950/40 absolute inset-0 backdrop-blur-[2px]"
+            className="bg-ink-950/40 animate-fade-in absolute inset-0 backdrop-blur-[2px]"
             onClick={() => setMobileOpen(false)}
             aria-hidden
           />
           <div
-            className="bg-surface relative flex h-full w-80 max-w-[88vw] flex-col shadow-xl"
+            className="bg-canvas border-ink-300/50 animate-slide-in-left relative flex h-full w-80 max-w-[88vw] flex-col border-r shadow-xl"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
           >
-            <div className="border-ink-100 flex h-16 items-center justify-between border-b pr-3">
+            <div className="border-ink-300/50 flex h-16 items-center justify-between border-b pr-3">
               {brand}
               <Button
                 variant="ghost"
@@ -317,7 +317,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
               </Button>
             </div>
             {isReviewer ? (
-              <div className="border-ink-100 border-b px-4 py-3">
+              <div className="border-ink-300/50 border-b px-4 py-3">
                 <p className="text-ink-400 mb-1.5 text-[10px] font-semibold tracking-widest uppercase">
                   Tracking schedule
                 </p>
@@ -325,7 +325,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
               </div>
             ) : null}
             <SidebarNav groups={navigation} onNavigate={() => setMobileOpen(false)} />
-            <div className="border-ink-100 border-t px-4 py-3">
+            <div className="border-ink-300/50 border-t px-4 py-3">
               <p className="text-ink-700 truncate text-xs font-medium">{profile?.full_name}</p>
               <p className="text-ink-500 truncate text-xs">{profile?.email}</p>
             </div>
@@ -334,7 +334,7 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
       ) : null}
 
       <div className="lg:pl-68">
-        <header className="border-ink-200/80 bg-surface/90 sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b px-4 backdrop-blur sm:px-6">
+        <header className="border-ink-300/50 bg-canvas sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b px-4 sm:px-6">
           <div className="flex min-w-0 items-center gap-2">
             <Button
               variant="ghost"
@@ -364,7 +364,9 @@ export function AppShell({ navigation }: { navigation: NavGroup[] }) {
             'mx-auto w-full max-w-7xl px-4 pt-5 pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:px-6 sm:pt-6 lg:pt-8 lg:pb-10',
           )}
         >
-          <Outlet />
+          <div key={location.pathname} className="animate-page-in">
+            <Outlet />
+          </div>
         </main>
       </div>
 
