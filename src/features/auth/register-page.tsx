@@ -47,7 +47,7 @@ function friendlySignUpError(message: string): string {
     return message
   }
   if (normalized.includes('rate limit') || normalized.includes('too many')) {
-    return 'Too many sign-up attempts. Please wait a few minutes and try again.'
+    return 'Too many sign-ups from this network right now. Wait a few minutes, or switch to mobile data. If email confirmation is on, check whether the confirmation email already arrived.'
   }
   return message
 }

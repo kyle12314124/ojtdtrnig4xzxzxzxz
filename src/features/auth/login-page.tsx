@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -19,6 +19,15 @@ const loginSchema = z.object({
 
 type LoginValues = z.infer<typeof loginSchema>
 
+function isRateLimited(message: string): boolean {
+  const normalized = message.toLowerCase()
+  return (
+    normalized.includes('too many requests') ||
+    normalized.includes('rate limit') ||
+    normalized.includes('over_request_rate_limit')
+  )
+}
+
 function friendlyAuthError(message: string): string {
   const normalized = message.toLowerCase()
   if (normalized.includes('invalid login credentials')) {
@@ -27,8 +36,8 @@ function friendlyAuthError(message: string): string {
   if (normalized.includes('email not confirmed')) {
     return 'Your email address has not been confirmed yet. Contact your administrator.'
   }
-  if (normalized.includes('too many requests') || normalized.includes('rate limit')) {
-    return 'Too many sign-in attempts. Please wait a moment and try again.'
+  if (isRateLimited(message)) {
+    return 'Too many sign-ins from this network right now — this happens on shared school Wi-Fi. Wait a while, or try mobile data. Retrying keeps the limit active.'
   }
   if (normalized.includes('network')) {
     return 'Cannot reach the authentication server. Check your connection and try again.'
@@ -42,6 +51,14 @@ export function LoginPage() {
   const location = useLocation()
   const [showPassword, setShowPassword] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [cooldown, setCooldown] = useState(0)
+
+  // After a rate-limit response, stop the user from burning more attempts.
+  useEffect(() => {
+    if (cooldown <= 0) return
+    const timer = window.setTimeout(() => setCooldown((value) => value - 1), 1000)
+    return () => window.clearTimeout(timer)
+  }, [cooldown])
 
   const {
     register,
@@ -68,7 +85,9 @@ export function LoginPage() {
       await signIn(values.email, values.password)
       navigate(from, { replace: true })
     } catch (error) {
-      setSubmitError(friendlyAuthError(errorMessage(error)))
+      const message = errorMessage(error)
+      setSubmitError(friendlyAuthError(message))
+      if (isRateLimited(message)) setCooldown(60)
     }
   }
 
@@ -260,9 +279,9 @@ export function LoginPage() {
               size="lg"
               className="w-full"
               loading={isSubmitting}
-              disabled={!isSupabaseConfigured}
+              disabled={!isSupabaseConfigured || cooldown > 0}
             >
-              {isSubmitting ? 'Signing in…' : 'Sign in'}
+              {cooldown > 0 ? `Please wait ${cooldown}s` : isSubmitting ? 'Signing in…' : 'Sign in'}
             </Button>
           </form>
 
